@@ -3,6 +3,7 @@ package com.adamkoch.lrs.builders;
 import com.adamkoch.lrs.*;
 import com.adamkoch.lrs.Statement;
 import com.adamkoch.lrs.api.*;
+import com.adamkoch.lrs.api.Verb;
 
 import java.time.LocalDateTime;
 

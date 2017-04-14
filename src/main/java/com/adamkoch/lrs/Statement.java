@@ -51,7 +51,7 @@ public class Statement implements com.adamkoch.lrs.api.Statement {
     private Collection attachments;
 
     @Required
-    private Verb verb;
+    private com.adamkoch.lrs.api.Verb verb;
 
     /**
      * Not recommended
@@ -62,7 +62,7 @@ public class Statement implements com.adamkoch.lrs.api.Statement {
         this.statementId = statementId;
     }
 
-    public StatementId getStatementId() {
+    public StatementId getId() {
         return statementId;
     }
 
@@ -90,11 +90,11 @@ public class Statement implements com.adamkoch.lrs.api.Statement {
         this.object = object;
     }
 
-    public Verb getVerb() {
+    public com.adamkoch.lrs.api.Verb getVerb() {
         return verb;
     }
 
-    public void setVerb(Verb verb) {
+    public void setVerb(com.adamkoch.lrs.api.Verb verb) {
         this.verb = verb;
     }
 

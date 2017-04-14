@@ -36,14 +36,18 @@ public class ActorBuilder {
             }
 
             if (actorType == ActorType.AGENT) {
-                if (mbox == null) {
-                    throw new NotYetImplementedException();
-                }
-                else {
+
+//                An Agent MUST be identified by one (1) of the four types of Inverse Functional Identifiers (see 4.1.2.3 Inverse Functional Identifier);
+//                An Agent MUST NOT include more than one (1) Inverse Functional Identifier;
+
+                if ((mbox != null) ^ false ^ false) {
                     MboxActor mboxActor = new MboxActor();
                     mboxActor.setName(name);
                     mboxActor.setId(new MboxId(MailToIriCreator.of(mbox)));
                     actor = mboxActor;
+                }
+                else {
+                    throw new IllegalArgumentException("Actor without mbox is not supported yet. TODO");
                 }
             }
             else if (actorType == ActorType.GROUP) {
@@ -72,8 +76,11 @@ public class ActorBuilder {
         return this;
     }
 
-    public ActorBuilder type(String objectType) {
-        this.type = objectType;
+    /**
+     * Takes a String because it's intention is to read from JSON.
+     */
+    public ActorBuilder type(String type) {
+        this.type = type;
         return this;
     }
 

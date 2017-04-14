@@ -11,11 +11,13 @@ import com.adamkoch.lrs.api.LanguageMap;
  * @author aakoch
  * @since 1.0.0
  */
-public class Verb {
+public class Verb implements com.adamkoch.lrs.api.Verb {
+    @Override
     public InternationalizedResourceIdentifier getId() {
         return null;
     }
 
+    @Override
     public LanguageMap getDisplay() {
         return null;
     }

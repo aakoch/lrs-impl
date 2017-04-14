@@ -1,14 +1,16 @@
 package com.adamkoch.lrs;
 
-import com.adamkoch.lrs.api.Actor;
+import com.adamkoch.lrs.api.*;
 import com.adamkoch.lrs.builders.ActorBuilder;
 import com.adamkoch.lrs.builders.StatementBuilder;
-import org.hamcrest.CoreMatchers;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.junit.Assert.assertThat;
 
 /**
  * Created by aakoch on 2017-03-11.
@@ -21,26 +23,32 @@ public class StatementBuilderTest {
     StatementBuilder builder = new StatementBuilder();
 
     @Test
-    public void build() throws Exception {
-        Assert.assertThat(builder.build(), CoreMatchers.instanceOf(Statement.class));
-    }
-
-    @Test
-    public void id() throws Exception {
+    public void testBuild() throws Exception {
         StatementId testStatementId = new StatementId(UUID.randomUUID());
-        Assert.assertThat(builder.id(testStatementId).build().getStatementId(), CoreMatchers.equalTo(testStatementId));
-    }
-
-    @Test
-    public void timestamp() throws Exception {
         LocalDateTime testTimestamp = LocalDateTime.now();
-        Assert.assertThat(builder.timestamp(testTimestamp).build().getTimestamp(), CoreMatchers.equalTo(testTimestamp));
-    }
+        Actor testActor = new ActorBuilder().type(ActorType.AGENT.toString()).mbox("mailto:test@example.com").build();
+        LrsObject testLrsObject = new AbstractAgent() {
+            @Override
+            public String getName() {
+                return null;
+            }
+        };
+        com.adamkoch.lrs.api.Verb testVerb = new Verb();
 
-    @Test
-    public void actor() throws Exception {
-        Actor testActor = new ActorBuilder().build();
-        Assert.assertThat(builder.actor(testActor).build().getActor(), CoreMatchers.equalTo(testActor));
+        Statement statement = builder
+                .id(testStatementId)
+                .actor(testActor)
+                .timestamp(testTimestamp)
+                .object(testLrsObject)
+                .verb(testVerb)
+                .build();
+
+        assertThat(statement, instanceOf(Statement.class));
+        assertThat(statement.getId(), equalTo(testStatementId));
+        assertThat(statement.getTimestamp(), equalTo(testTimestamp));
+        assertThat(statement.getActor(), equalTo(testActor));
+        assertThat(statement.getVerb(), equalTo(testVerb));
+        assertThat(statement.getObject(), equalTo(testLrsObject));
     }
 
 }

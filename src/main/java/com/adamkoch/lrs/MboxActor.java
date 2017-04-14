@@ -2,6 +2,8 @@ package com.adamkoch.lrs;
 
 import com.adamkoch.lrs.api.Agent;
 
+import java.util.Optional;
+
 /**
  * <a href=""></a>
  *
@@ -10,10 +12,11 @@ import com.adamkoch.lrs.api.Agent;
  * @author aakoch
  * @since 1.0.0
  */
-public class MboxActor extends Agent {
+public class MboxActor implements Agent {
 
     private String name;
     private String mbox;
+    private MboxId id;
 
     public void setName(String name) {
         this.name = name;
@@ -23,8 +26,8 @@ public class MboxActor extends Agent {
         return name;
     }
 
-    public String getObjectType() {
-        return "Agent";
+    public Optional<String> getObjectType() {
+        return Optional.of("Agent");
     }
 
     public void setMbox(String mbox) {
@@ -33,5 +36,9 @@ public class MboxActor extends Agent {
 
     public String getMbox() {
         return mbox;
+    }
+
+    public void setId(MboxId id) {
+        this.id = id;
     }
 }

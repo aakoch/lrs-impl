@@ -1,6 +1,7 @@
 package com.adamkoch.lrs;
 
 import com.adamkoch.lrs.annotations.Required;
+import com.adamkoch.lrs.api.Account;
 import com.adamkoch.lrs.api.InternationalizedResourceLocator;
 
 /**
@@ -14,16 +15,26 @@ import com.adamkoch.lrs.api.InternationalizedResourceLocator;
  * @author aakoch
  * @since 1.0.0
  */
-public class Account {
-    /**
-     * The canonical home page for the system the account is on. This is based on FOAF's accountServiceHomePage.
-     */
-    @Required
+public class AccountImpl implements Account {
     private InternationalizedResourceLocator homePage;
 
-    /**
-     * The unique id or name used to log in to this account. This is based on FOAF's accountName.
-     */
-    @Required
     private String name;
+
+    @Override
+    public InternationalizedResourceLocator getHomePage() {
+        return homePage;
+    }
+
+    public void setHomePage(InternationalizedResourceLocator homePage) {
+        this.homePage = homePage;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

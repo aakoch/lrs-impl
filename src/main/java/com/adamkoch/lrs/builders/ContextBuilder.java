@@ -1,10 +1,7 @@
 package com.adamkoch.lrs.builders;
 
 import com.adamkoch.lrs.NotYetImplementedException;
-import com.adamkoch.lrs.api.Agent;
-import com.adamkoch.lrs.api.Context;
-import com.adamkoch.lrs.api.Group;
-import com.adamkoch.lrs.api.StatementReference;
+import com.adamkoch.lrs.api.*;
 
 import java.util.Map;
 import java.util.UUID;
@@ -26,9 +23,14 @@ public class ContextBuilder {
             }
 
             @Override
-            public Agent getInstructor() {
-                throw new NotYetImplementedException();
+            public AbstractAgent getInstructor() {
+                return null;
             }
+
+//            @Override
+//            public Agent getInstructor() {
+//                throw new NotYetImplementedException();
+//            }
 
             @Override
             public Group getTeam() {

@@ -7,6 +7,10 @@ import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.junit.Assert.assertThat;
+
 /**
  * Created by aakoch on 2017-03-11.
  *
@@ -24,21 +28,26 @@ public class ActorBuilderTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testBuild_withInvalidActorType_throwsIllegalArgumentException() throws Exception {
-        Assert.assertThat(builder.type("group").build(), CoreMatchers.instanceOf(Actor.class));
+        assertThat(builder.type("group").build(), instanceOf(Actor.class));
     }
 
     @Test
     public void testBuild_withGroupType() throws Exception {
         Actor actor = builder.type("Group").build();
-        Assert.assertThat(actor, CoreMatchers.instanceOf(Actor.class));
-        Assert.assertThat(actor.getObjectType(), CoreMatchers.equalTo(ActorType.GROUP.toString()));
+        assertThat(actor, instanceOf(Actor.class));
+        assertThat(actor.getObjectType().get(), equalTo(ActorType.GROUP.toString()));
     }
 
     @Test
     public void testBuild_withAgentType() throws Exception {
-        Actor actor = builder.type("Agent").build();
-        Assert.assertThat(actor, CoreMatchers.instanceOf(Actor.class));
-        Assert.assertThat(actor.getObjectType(), CoreMatchers.equalTo(ActorType.AGENT.toString()));
+        Actor actor = builder
+                .type("Agent")
+        // temporary?
+                .mbox("test")
+                .build();
+        assertThat(actor, instanceOf(Actor.class));
+
+        assertThat(actor.getObjectType().get(), equalTo(ActorType.AGENT.toString()));
     }
 
     @Test

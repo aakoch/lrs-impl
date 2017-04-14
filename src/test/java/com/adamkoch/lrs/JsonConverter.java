@@ -29,7 +29,7 @@ public class JsonConverter {
         LocalDateTime localDateTime = zonedDateTime.toLocalDateTime();
         LOGGER.debug("localDateTime = " + localDateTime);
 
-        Actor actor = convertToActor(jsonObject);
+        Actor actor = convertToActor(jsonObject.getJsonObject("actor"));
 
         JsonObject verbJsonObject = jsonObject.getJsonObject("verb");
         Verb verb = new VerbBuilder().build();
