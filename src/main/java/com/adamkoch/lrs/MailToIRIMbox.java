@@ -1,7 +1,5 @@
 package com.adamkoch.lrs;
 
-import com.adamkoch.lrs.api.InverseFunctionalIdentifier;
-
 /**
  * <a href=""></a>
  *
@@ -10,10 +8,10 @@ import com.adamkoch.lrs.api.InverseFunctionalIdentifier;
  * @author aakoch
  * @since 1.0.0
  */
-public class Mbox implements InverseFunctionalIdentifier {
+public class MailToIRIMbox implements com.adamkoch.lrs.api.Mbox {
     private final MailToIRI mbox;
 
-    public Mbox(MailToIRI mbox) {
+    public MailToIRIMbox(MailToIRI mbox) {
         this.mbox = mbox;
     }
 
@@ -27,7 +25,7 @@ public class Mbox implements InverseFunctionalIdentifier {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Mbox mbox = (Mbox) o;
+        MailToIRIMbox mbox = (MailToIRIMbox) o;
 
         return this.mbox != null ? this.mbox.equals(mbox.mbox) : mbox.mbox == null;
     }

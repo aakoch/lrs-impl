@@ -43,7 +43,7 @@ public class ActorBuilder {
                 if ((mbox != null) ^ false ^ false) {
                     MboxActor mboxActor = new MboxActor();
                     mboxActor.setName(name);
-                    mboxActor.setId(new Mbox(MailToIriCreator.of(mbox)));
+                    mboxActor.setId(new MailToIRIMbox(MailToIriCreator.of(mbox)));
                     actor = mboxActor;
                 }
                 else {

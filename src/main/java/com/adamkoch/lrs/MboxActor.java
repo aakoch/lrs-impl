@@ -1,6 +1,7 @@
 package com.adamkoch.lrs;
 
 import com.adamkoch.lrs.api.Agent;
+import com.adamkoch.lrs.api.Mbox;
 
 import java.util.Optional;
 
