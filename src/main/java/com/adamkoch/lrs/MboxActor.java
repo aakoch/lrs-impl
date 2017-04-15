@@ -16,7 +16,7 @@ public class MboxActor implements Agent {
 
     private String name;
     private String mbox;
-    private MboxId id;
+    private Mbox id;
 
     public void setName(String name) {
         this.name = name;
@@ -38,7 +38,7 @@ public class MboxActor implements Agent {
         return mbox;
     }
 
-    public void setId(MboxId id) {
+    public void setId(Mbox id) {
         this.id = id;
     }
 }

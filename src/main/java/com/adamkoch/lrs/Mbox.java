@@ -10,10 +10,10 @@ import com.adamkoch.lrs.api.InverseFunctionalIdentifier;
  * @author aakoch
  * @since 1.0.0
  */
-public class MboxId implements InverseFunctionalIdentifier {
+public class Mbox implements InverseFunctionalIdentifier {
     private final MailToIRI mbox;
 
-    public MboxId(MailToIRI mbox) {
+    public Mbox(MailToIRI mbox) {
         this.mbox = mbox;
     }
 
@@ -27,9 +27,9 @@ public class MboxId implements InverseFunctionalIdentifier {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        MboxId mboxId = (MboxId) o;
+        Mbox mbox = (Mbox) o;
 
-        return mbox != null ? mbox.equals(mboxId.mbox) : mboxId.mbox == null;
+        return this.mbox != null ? this.mbox.equals(mbox.mbox) : mbox.mbox == null;
     }
 
     @Override

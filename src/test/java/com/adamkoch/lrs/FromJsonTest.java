@@ -44,7 +44,7 @@ public class FromJsonTest {
 
         assertEquals("Project Tin Can API", actor.getName());
         assertEquals("Agent", actor.getObjectType().get());
-//        assertEquals(new MboxId(MailToIriCreator.of("mailto:user@example.com")), actor.getId());
+//        assertEquals(new Mbox(MailToIriCreator.of("mailto:user@example.com")), actor.getId());
     }
 
     @Test
