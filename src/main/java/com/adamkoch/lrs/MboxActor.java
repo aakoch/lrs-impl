@@ -23,8 +23,8 @@ public class MboxActor implements Agent {
         this.name = name;
     }
 
-    public String getName() {
-        return name;
+    public Optional<String> getName() {
+        return Optional.of(name);
     }
 
     public Optional<String> getObjectType() {

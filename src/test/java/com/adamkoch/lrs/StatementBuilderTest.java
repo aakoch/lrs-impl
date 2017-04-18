@@ -6,6 +6,7 @@ import com.adamkoch.lrs.builders.StatementBuilder;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -29,8 +30,8 @@ public class StatementBuilderTest {
         Actor testActor = new ActorBuilder().type(ActorType.AGENT.toString()).mbox("mailto:test@example.com").build();
         LrsObject testLrsObject = new AbstractAgent() {
             @Override
-            public String getName() {
-                return null;
+            public Optional<String> getName() {
+                throw new NotYetImplementedException();
             }
         };
         com.adamkoch.lrs.api.Verb testVerb = new Verb();

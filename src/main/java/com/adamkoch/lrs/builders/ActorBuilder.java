@@ -8,6 +8,7 @@ import com.adamkoch.lrs.api.Group;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Optional;
 
 /**
  * Used to create an {@link Actor}.
@@ -43,7 +44,7 @@ public class ActorBuilder {
                 if ((mbox != null) ^ false ^ false) {
                     MboxActor mboxActor = new MboxActor();
                     mboxActor.setName(name);
-                    mboxActor.setId(new MailToIRIMbox(MailToIriCreator.of(mbox)));
+                    mboxActor.setId(new MailToIriMbox(MailToIriCreator.of(mbox)));
                     actor = mboxActor;
                 }
                 else {
@@ -58,8 +59,8 @@ public class ActorBuilder {
                     }
 
                     @Override
-                    public String getName() {
-                        return name;
+                    public Optional<String> getName() {
+                        return Optional.of(name);
                     }
                 };
             }

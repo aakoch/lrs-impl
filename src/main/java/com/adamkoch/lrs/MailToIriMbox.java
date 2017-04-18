@@ -8,10 +8,10 @@ package com.adamkoch.lrs;
  * @author aakoch
  * @since 1.0.0
  */
-public class MailToIRIMbox implements com.adamkoch.lrs.api.Mbox {
+public class MailToIriMbox implements com.adamkoch.lrs.api.Mbox {
     private final MailToIRI mbox;
 
-    public MailToIRIMbox(MailToIRI mbox) {
+    public MailToIriMbox(MailToIRI mbox) {
         this.mbox = mbox;
     }
 
@@ -25,7 +25,7 @@ public class MailToIRIMbox implements com.adamkoch.lrs.api.Mbox {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        MailToIRIMbox mbox = (MailToIRIMbox) o;
+        MailToIriMbox mbox = (MailToIriMbox) o;
 
         return this.mbox != null ? this.mbox.equals(mbox.mbox) : mbox.mbox == null;
     }
@@ -33,5 +33,10 @@ public class MailToIRIMbox implements com.adamkoch.lrs.api.Mbox {
     @Override
     public int hashCode() {
         return mbox != null ? mbox.hashCode() : 0;
+    }
+
+    @Override
+    public String getSha1Sum() {
+        throw new NotYetImplementedException();
     }
 }

@@ -1,5 +1,6 @@
 package com.adamkoch.lrs.builders;
 
+import com.adamkoch.lrs.AbstractAgent;
 import com.adamkoch.lrs.NotYetImplementedException;
 import com.adamkoch.lrs.api.*;
 

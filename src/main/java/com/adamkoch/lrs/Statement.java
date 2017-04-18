@@ -1,8 +1,5 @@
 package com.adamkoch.lrs;
 
-import com.adamkoch.lrs.annotations.Optional;
-import com.adamkoch.lrs.annotations.Recommended;
-import com.adamkoch.lrs.annotations.Required;
 import com.adamkoch.lrs.api.*;
 
 import java.time.LocalDateTime;
@@ -18,25 +15,19 @@ import java.util.Collection;
  */
 public class Statement implements com.adamkoch.lrs.api.Statement {
 
-    @Recommended
     private StatementId statementId;
 
-    @Optional
     private LocalDateTime timestamp;
 
-    @Required
     private Actor actor;
 
     /**
      * Valid values are: Activity, Agent, Group, SubStatement or StatementRef
      */
-    @Required
     private LrsObject object;
 
-    @Optional
     private Result result;
 
-    @Optional
     private Context context;
 
     /**
@@ -44,13 +35,10 @@ public class Statement implements com.adamkoch.lrs.api.Statement {
      */
     private LocalDateTime stored;
 
-    @Optional
     private Authority authority;
 
-    @Optional
     private Collection attachments;
 
-    @Required
     private com.adamkoch.lrs.api.Verb verb;
 
     /**

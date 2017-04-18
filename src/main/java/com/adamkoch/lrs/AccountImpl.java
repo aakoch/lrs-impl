@@ -1,8 +1,9 @@
 package com.adamkoch.lrs;
 
-import com.adamkoch.lrs.annotations.Required;
 import com.adamkoch.lrs.api.Account;
 import com.adamkoch.lrs.api.InternationalizedResourceLocator;
+
+import java.util.Optional;
 
 /**
  * <a href="https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#2424-account-object">Account</a>.
@@ -36,5 +37,10 @@ public class AccountImpl implements Account {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public Optional<String> getObjectType() {
+        throw new NotYetImplementedException();
     }
 }

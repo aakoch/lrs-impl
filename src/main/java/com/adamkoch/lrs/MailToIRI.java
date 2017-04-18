@@ -11,4 +11,7 @@ import com.adamkoch.lrs.api.InternationalizedResourceIdentifier;
  * @since 1.0.0
  */
 public interface MailToIRI extends InternationalizedResourceIdentifier {
+    String getDomain();
+
+    String getUserName();
 }

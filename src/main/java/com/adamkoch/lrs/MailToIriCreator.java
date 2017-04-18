@@ -1,5 +1,7 @@
 package com.adamkoch.lrs;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * <a href=""></a>
  *
@@ -38,6 +40,16 @@ public class MailToIriCreator {
         @Override
         public int hashCode() {
             return mbox != null ? mbox.hashCode() : 0;
+        }
+
+        @Override
+        public String getDomain() {
+            return StringUtils.substringAfter(mbox, "@");
+        }
+
+        @Override
+        public String getUserName() {
+            return StringUtils.substringBefore(mbox, "@");
         }
     }
 }
