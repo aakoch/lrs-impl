@@ -1,0 +1,41 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'com.adamkoch.lrs'
+version = '1.0.0-SNAPSHOT'
+
+description = """"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
+
+
+repositories {
+        
+     maven { url "http://repo.maven.apache.org/maven2" }
+}
+dependencies {
+    compile group: 'com.adamkoch.lrs', name: 'lrs-api', version:'1.0.0-SNAPSHOT'
+    compile group: 'org.glassfish.jersey.containers', name: 'jersey-container-servlet', version:'2.25.1'
+    compile group: 'org.glassfish.jersey.media', name: 'jersey-media-moxy', version:'2.25.1'
+    compile group: 'gov.adlnet', name: 'jxapi', version:'1.0.3'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version:'3.5'
+    testCompile group: 'org.glassfish.jersey.test-framework.providers', name: 'jersey-test-framework-provider-bundle', version:'2.25.1'
+    testCompile group: 'org.slf4j', name: 'slf4j-api', version:'1.7.10'
+    testCompile group: 'ch.qos.logback', name: 'logback-core', version:'1.1.2'
+    testCompile group: 'ch.qos.logback', name: 'logback-classic', version:'1.1.2'
+    compile(group: 'org.eclipse.jetty', name: 'jetty-servlet', version:'9.0.6.v20130930') {
+       /* This dependency was originally in the Maven provided scope, but the project was not of type war.
+       This behavior is not yet supported by Gradle, so this dependency has been converted to a compile dependency.
+       Please review and delete this closure when resolved. */
+    }
+    compile(group: 'org.eclipse.jetty', name: 'jetty-webapp', version:'9.0.6.v20130930') {
+       /* This dependency was originally in the Maven provided scope, but the project was not of type war.
+       This behavior is not yet supported by Gradle, so this dependency has been converted to a compile dependency.
+       Please review and delete this closure when resolved. */
+    }
+}
