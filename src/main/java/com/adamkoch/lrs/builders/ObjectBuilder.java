@@ -7,8 +7,6 @@ import com.adamkoch.lrs.api.InternationalizedResourceIdentifier;
 import com.adamkoch.lrs.api.LrsObject;
 
 /**
- * <a href=""></a>
- *
  * <p>Created by aakoch on 2017-03-23.</p>
  *
  * @author aakoch
@@ -16,16 +14,6 @@ import com.adamkoch.lrs.api.LrsObject;
  */
 public class ObjectBuilder {
     public LrsObject build() {
-        return new ActivityObject() {
-            @Override
-            public InternationalizedResourceIdentifier getId() {
-                throw new NotYetImplementedException();
-            }
-
-            @Override
-            public ActivityDefinition getDefinition() {
-                throw new NotYetImplementedException();
-            }
-        };
+        return new JsonActivityObject();
     }
 }

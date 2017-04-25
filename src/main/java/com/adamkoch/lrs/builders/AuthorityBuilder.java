@@ -1,10 +1,9 @@
 package com.adamkoch.lrs.builders;
 
+import com.adamkoch.lrs.JsonAuthority;
 import com.adamkoch.lrs.api.Authority;
 
 /**
- * <a href=""></a>
- *
  * <p>Created by aakoch on 2017-03-23.</p>
  *
  * @author aakoch
@@ -12,7 +11,6 @@ import com.adamkoch.lrs.api.Authority;
  */
 public class AuthorityBuilder {
     public Authority build() {
-        return new Authority() {
-        };
+        return new JsonAuthority();
     }
 }

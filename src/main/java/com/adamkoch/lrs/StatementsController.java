@@ -7,8 +7,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 /**
- *
- * Created by aakoch on 2017-03-11.
+ * <p>Created by aakoch on 2017-03-11.</p>
  *
  * @author aakoch
  * @since 1.0.0

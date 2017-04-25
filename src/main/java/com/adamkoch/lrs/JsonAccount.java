@@ -2,7 +2,10 @@ package com.adamkoch.lrs;
 
 import com.adamkoch.lrs.api.Account;
 import com.adamkoch.lrs.api.InternationalizedResourceLocator;
+import com.adamkoch.lrs.api.JsonSerializable;
 
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
 import java.util.Optional;
 
 /**
@@ -16,7 +19,7 @@ import java.util.Optional;
  * @author aakoch
  * @since 1.0.0
  */
-public class AccountImpl implements Account {
+public class JsonAccount implements Account, JsonSerializable {
     private InternationalizedResourceLocator homePage;
 
     private String name;
@@ -41,6 +44,11 @@ public class AccountImpl implements Account {
 
     @Override
     public Optional<String> getObjectType() {
+        throw new NotYetImplementedException();
+    }
+
+    @Override
+    public JsonObject toJson(JsonObjectBuilder builder) {
         throw new NotYetImplementedException();
     }
 }

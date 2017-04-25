@@ -27,8 +27,7 @@ public class ActorBuilder {
         final Actor actor;
         if (type == null) {
             throw new IllegalArgumentException("Missing required actor type");
-        }
-        else {
+        } else {
             ActorType actorType;
             try {
                 actorType = ActorType.of(type);
@@ -46,12 +45,10 @@ public class ActorBuilder {
                     mboxActor.setName(name);
                     mboxActor.setId(new MailToIriMbox(MailToIriCreator.of(mbox)));
                     actor = mboxActor;
-                }
-                else {
+                } else {
                     throw new IllegalArgumentException("Actor without mbox is not supported yet. TODO");
                 }
-            }
-            else if (actorType == ActorType.GROUP) {
+            } else if (actorType == ActorType.GROUP) {
                 actor = new Group() {
                     @Override
                     public Collection<Agent> getMember() {
@@ -63,8 +60,7 @@ public class ActorBuilder {
                         return Optional.of(name);
                     }
                 };
-            }
-            else {
+            } else {
                 throw new IllegalArgumentException("Unknown actor type \"" + type + "\"");
             }
         }

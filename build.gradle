@@ -4,20 +4,16 @@ apply plugin: 'maven'
 group = 'com.adamkoch.lrs'
 version = '1.0.0-SNAPSHOT'
 
-description = """"""
-
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 tasks.withType(JavaCompile) {
 	options.encoding = 'UTF-8'
 }
 
-
-
 repositories {
-        
      maven { url "http://repo.maven.apache.org/maven2" }
 }
+
 dependencies {
     compile group: 'com.adamkoch.lrs', name: 'lrs-api', version:'1.0.0-SNAPSHOT'
     compile group: 'org.glassfish.jersey.containers', name: 'jersey-container-servlet', version:'2.25.1'

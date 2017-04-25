@@ -2,6 +2,7 @@ package com.adamkoch.lrs;
 
 import com.adamkoch.lrs.api.Actor;
 import com.adamkoch.lrs.api.Agent;
+import com.adamkoch.lrs.api.Statement;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -25,6 +26,7 @@ public class FromJsonTest {
     @Test
     public void testSimpleStatement() {
         JsonObject jsonObject = readFromFileToJsonObject("examples/simple_statement.json");
+
         Statement statement = JsonConverter.convertToStatement(jsonObject);
 
         assertEquals(StatementId.of("fd41c918-b88b-4b20-a0a5-a4c32391aaa0"), statement.getId());
@@ -42,7 +44,7 @@ public class FromJsonTest {
         JsonObject jsonObject = readFromFileToJsonObject("examples/simple_actor.json");
         Actor actor = JsonConverter.convertToActor(jsonObject);
 
-        assertEquals("Project Tin Can API", actor.getName());
+        assertEquals("Project Tin Can API", actor.getName().get());
         assertEquals("Agent", actor.getObjectType().get());
 //        assertEquals(new MailToIriMbox(MailToIriCreator.of("mailto:user@example.com")), actor.getId());
     }

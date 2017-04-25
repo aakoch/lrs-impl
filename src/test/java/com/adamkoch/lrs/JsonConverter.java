@@ -10,8 +10,6 @@ import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 
 /**
- * <a href=""></a>
- *
  * <p>Created by aakoch on 2017-03-23.</p>
  *
  * @author aakoch

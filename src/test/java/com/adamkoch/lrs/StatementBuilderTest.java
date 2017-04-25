@@ -34,7 +34,7 @@ public class StatementBuilderTest {
                 throw new NotYetImplementedException();
             }
         };
-        com.adamkoch.lrs.api.Verb testVerb = new Verb();
+        Verb testVerb = new JsonVerb();
 
         Statement statement = builder
                 .id(testStatementId)

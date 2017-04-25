@@ -2,6 +2,8 @@ package com.adamkoch.lrs;
 
 import com.adamkoch.lrs.api.*;
 
+import javax.json.*;
+import java.io.StringWriter;
 import java.time.LocalDateTime;
 import java.util.Collection;
 
@@ -18,7 +20,7 @@ import java.util.Collection;
  * @author aakoch
  * @since 1.0.0
  */
-public class Statement implements com.adamkoch.lrs.api.Statement {
+public class JsonStatement implements Statement, JsonSerializable {
 
     private StatementId statementId;
 
@@ -68,6 +70,7 @@ public class Statement implements com.adamkoch.lrs.api.Statement {
         this.statementId = statementId;
     }
 
+    @Override
     public StatementId getId() {
         return statementId;
     }
@@ -79,6 +82,7 @@ public class Statement implements com.adamkoch.lrs.api.Statement {
         this.timestamp = timestamp;
     }
 
+    @Override
     public LocalDateTime getTimestamp() {
         return timestamp;
     }
@@ -90,10 +94,12 @@ public class Statement implements com.adamkoch.lrs.api.Statement {
         this.actor = actor;
     }
 
+    @Override
     public Actor getActor() {
         return actor;
     }
 
+    @Override
     public LrsObject getObject() {
         return object;
     }
@@ -105,6 +111,7 @@ public class Statement implements com.adamkoch.lrs.api.Statement {
         this.object = object;
     }
 
+    @Override
     public com.adamkoch.lrs.api.Verb getVerb() {
         return verb;
     }
@@ -116,6 +123,7 @@ public class Statement implements com.adamkoch.lrs.api.Statement {
         this.verb = verb;
     }
 
+    @Override
     public Result getResult() {
         return result;
     }
@@ -127,6 +135,7 @@ public class Statement implements com.adamkoch.lrs.api.Statement {
         this.result = result;
     }
 
+    @Override
     public Context getContext() {
         return context;
     }
@@ -138,6 +147,7 @@ public class Statement implements com.adamkoch.lrs.api.Statement {
         this.context = context;
     }
 
+    @Override
     public Authority getAuthority() {
         return authority;
     }
@@ -149,6 +159,7 @@ public class Statement implements com.adamkoch.lrs.api.Statement {
         this.authority = authority;
     }
 
+    @Override
     public String getVersion() {
         return version;
     }
@@ -160,6 +171,7 @@ public class Statement implements com.adamkoch.lrs.api.Statement {
         this.version = version;
     }
 
+    @Override
     public LocalDateTime getStored() {
         return stored;
     }
@@ -171,6 +183,7 @@ public class Statement implements com.adamkoch.lrs.api.Statement {
         this.stored = stored;
     }
 
+    @Override
     public Collection getAttachments() {
         return attachments;
     }
@@ -195,7 +208,7 @@ public class Statement implements com.adamkoch.lrs.api.Statement {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Statement statement = (Statement) o;
+        JsonStatement statement = (JsonStatement) o;
 
         if (statementId != null ? !statementId.equals(statement.statementId) : statement.statementId != null)
             return false;
@@ -230,5 +243,39 @@ public class Statement implements com.adamkoch.lrs.api.Statement {
         result1 = 31 * result1 + (verb != null ? verb.hashCode() : 0);
         result1 = 31 * result1 + (version != null ? version.hashCode() : 0);
         return result1;
+    }
+
+    public String toJson() {
+        JsonObject object = toJson(Json.createObjectBuilder());
+
+        StringWriter stringWriter = new StringWriter();
+        JsonWriter jsonWriter = Json.createWriter(stringWriter);
+        jsonWriter.writeObject(object);
+        jsonWriter.close();
+
+        return stringWriter.toString();
+    }
+
+    @Override
+    public JsonObject toJson(JsonObjectBuilder builder) {
+        JsonObject object = builder
+                .add("firstName", "John")
+                .add("lastName", "Smith")
+                .add("age", 25)
+                .add("address", Json.createObjectBuilder()
+                        .add("streetAddress", "21 2nd Street")
+                        .add("city", "New York")
+                        .add("state", "NY")
+                        .add("postalCode", "10021"))
+                .add("phoneNumber", Json.createArrayBuilder()
+                        .add(Json.createObjectBuilder()
+                                .add("type", "home")
+                                .add("number", "212 555-1234"))
+                        .add(Json.createObjectBuilder()
+                                .add("type", "fax")
+                                .add("number", "646 555-4567")))
+                .build();
+
+        return object;
     }
 }

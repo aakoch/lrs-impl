@@ -1,7 +1,6 @@
 package com.adamkoch.lrs.builders;
 
 import com.adamkoch.lrs.*;
-import com.adamkoch.lrs.Statement;
 import com.adamkoch.lrs.api.*;
 import com.adamkoch.lrs.api.Verb;
 
@@ -38,7 +37,7 @@ public class StatementBuilder {
         if (verb == null) {
             throw new IllegalArgumentException("Verb is required");
         }
-        Statement statement = new Statement();
+        JsonStatement statement = new JsonStatement();
         statement.setStatementId(statementId);
         statement.setTimestamp(localDateTime);
         statement.setActor(actor);

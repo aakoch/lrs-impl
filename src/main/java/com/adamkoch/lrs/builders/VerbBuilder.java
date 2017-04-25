@@ -1,10 +1,9 @@
 package com.adamkoch.lrs.builders;
 
-import com.adamkoch.lrs.Verb;
+import com.adamkoch.lrs.JsonVerb;
+import com.adamkoch.lrs.api.Verb;
 
 /**
- * <a href=""></a>
- *
  * <p>Created by aakoch on 2017-03-23.</p>
  *
  * @author aakoch
@@ -12,6 +11,6 @@ import com.adamkoch.lrs.Verb;
  */
 public class VerbBuilder {
     public Verb build() {
-        return new Verb();
+        return new JsonVerb();
     }
 }

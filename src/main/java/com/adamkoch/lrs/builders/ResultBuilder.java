@@ -1,5 +1,6 @@
 package com.adamkoch.lrs.builders;
 
+import com.adamkoch.lrs.JsonResult;
 import com.adamkoch.lrs.api.LrsObject;
 import com.adamkoch.lrs.NotYetImplementedException;
 import com.adamkoch.lrs.api.Result;
@@ -17,36 +18,6 @@ import java.time.Duration;
  */
 public class ResultBuilder {
     public Result build() {
-        return new Result() {
-            @Override
-            public Score getScore() {
-                throw new NotYetImplementedException();
-            }
-
-            @Override
-            public Boolean getSuccess() {
-                throw new NotYetImplementedException();
-            }
-
-            @Override
-            public Boolean getCompletion() {
-                throw new NotYetImplementedException();
-            }
-
-            @Override
-            public String getResponse() {
-                throw new NotYetImplementedException();
-            }
-
-            @Override
-            public Duration getDuration() {
-                throw new NotYetImplementedException();
-            }
-
-            @Override
-            public LrsObject getExtensions() {
-                throw new NotYetImplementedException();
-            }
-        };
+        return new JsonResult();
     }
 }
