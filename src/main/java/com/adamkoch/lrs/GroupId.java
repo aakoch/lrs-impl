@@ -8,5 +8,5 @@ import com.adamkoch.lrs.api.InverseFunctionalIdentifier;
  * @author aakoch
  * @since 1.0.0
  */
-public class GroupId implements InverseFunctionalIdentifier {
+public interface GroupId extends InverseFunctionalIdentifier {
 }

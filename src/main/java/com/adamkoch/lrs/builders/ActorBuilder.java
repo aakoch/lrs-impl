@@ -1,10 +1,12 @@
 package com.adamkoch.lrs.builders;
 
-import com.adamkoch.lrs.*;
+import com.adamkoch.lrs.MailToIriCreator;
+import com.adamkoch.lrs.MailToIriMbox;
+import com.adamkoch.lrs.MboxActor;
 import com.adamkoch.lrs.api.Actor;
-import com.adamkoch.lrs.api.ActorType;
 import com.adamkoch.lrs.api.Agent;
 import com.adamkoch.lrs.api.Group;
+import com.adamkoch.lrs.api.ObjectType;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -28,14 +30,14 @@ public class ActorBuilder {
         if (type == null) {
             throw new IllegalArgumentException("Missing required actor type");
         } else {
-            ActorType actorType;
+            ObjectType objectType;
             try {
-                actorType = ActorType.of(type);
+                objectType = ObjectType.of(type);
             } catch (IllegalArgumentException e) {
                 throw new IllegalArgumentException("Unknown actor type \"" + type + "\"");
             }
 
-            if (actorType == ActorType.AGENT) {
+            if (objectType == ObjectType.AGENT) {
 
 //                An Agent MUST be identified by one (1) of the four types of Inverse Functional Identifiers (see 4.1.2.3 Inverse Functional Identifier);
 //                An Agent MUST NOT include more than one (1) Inverse Functional Identifier;
@@ -48,7 +50,7 @@ public class ActorBuilder {
                 } else {
                     throw new IllegalArgumentException("Actor without mbox is not supported yet. TODO");
                 }
-            } else if (actorType == ActorType.GROUP) {
+            } else if (objectType == ObjectType.GROUP) {
                 actor = new Group() {
                     @Override
                     public Collection<Agent> getMember() {

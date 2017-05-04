@@ -27,7 +27,7 @@ public class StatementBuilderTest {
     public void testBuild() throws Exception {
         StatementId testStatementId = new StatementId(UUID.randomUUID());
         LocalDateTime testTimestamp = LocalDateTime.now();
-        Actor testActor = new ActorBuilder().type(ActorType.AGENT.toString()).mbox("mailto:test@example.com").build();
+        Actor testActor = new ActorBuilder().type(ObjectType.AGENT.toString()).mbox("mailto:test@example.com").build();
         LrsObject testLrsObject = new AbstractAgent() {
             @Override
             public Optional<String> getName() {

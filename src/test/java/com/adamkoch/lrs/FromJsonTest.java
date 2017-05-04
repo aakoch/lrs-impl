@@ -1,7 +1,7 @@
 package com.adamkoch.lrs;
 
 import com.adamkoch.lrs.api.Actor;
-import com.adamkoch.lrs.api.Agent;
+import com.adamkoch.lrs.api.ObjectType;
 import com.adamkoch.lrs.api.Statement;
 import org.junit.Assert;
 import org.junit.Test;
@@ -13,7 +13,6 @@ import java.io.InputStream;
 import java.time.LocalDateTime;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by aakoch on 2017-03-22.
@@ -45,7 +44,7 @@ public class FromJsonTest {
         Actor actor = JsonConverter.convertToActor(jsonObject);
 
         assertEquals("Project Tin Can API", actor.getName().get());
-        assertEquals("Agent", actor.getObjectType().get());
+        assertEquals(ObjectType.AGENT, actor.getObjectType().get());
 //        assertEquals(new MailToIriMbox(MailToIriCreator.of("mailto:user@example.com")), actor.getId());
     }
 

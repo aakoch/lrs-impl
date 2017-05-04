@@ -3,6 +3,7 @@ package com.adamkoch.lrs;
 import com.adamkoch.lrs.api.Account;
 import com.adamkoch.lrs.api.InternationalizedResourceLocator;
 import com.adamkoch.lrs.api.JsonSerializable;
+import com.adamkoch.lrs.api.ObjectType;
 
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
@@ -43,7 +44,7 @@ public class JsonAccount implements Account, JsonSerializable {
     }
 
     @Override
-    public Optional<String> getObjectType() {
+    public Optional<ObjectType> getObjectType() {
         throw new NotYetImplementedException();
     }
 

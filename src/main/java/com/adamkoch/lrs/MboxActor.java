@@ -2,12 +2,11 @@ package com.adamkoch.lrs;
 
 import com.adamkoch.lrs.api.Agent;
 import com.adamkoch.lrs.api.Mbox;
+import com.adamkoch.lrs.api.ObjectType;
 
 import java.util.Optional;
 
 /**
- * <a href=""></a>
- *
  * <p>Created by aakoch on 2017-03-23.</p>
  *
  * @author aakoch
@@ -27,8 +26,8 @@ public class MboxActor implements Agent {
         return Optional.of(name);
     }
 
-    public Optional<String> getObjectType() {
-        return Optional.of("Agent");
+    public Optional<ObjectType> getObjectType() {
+        return Optional.of(ObjectType.AGENT);
     }
 
     public void setMbox(String mbox) {

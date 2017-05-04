@@ -1,10 +1,8 @@
 package com.adamkoch.lrs;
 
 import com.adamkoch.lrs.api.Actor;
-import com.adamkoch.lrs.api.ActorType;
+import com.adamkoch.lrs.api.ObjectType;
 import com.adamkoch.lrs.builders.ActorBuilder;
-import org.hamcrest.CoreMatchers;
-import org.junit.Assert;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -35,7 +33,7 @@ public class ActorBuilderTest {
     public void testBuild_withGroupType() throws Exception {
         Actor actor = builder.type("Group").build();
         assertThat(actor, instanceOf(Actor.class));
-        assertThat(actor.getObjectType().get(), equalTo(ActorType.GROUP.toString()));
+        assertThat(actor.getObjectType().get(), equalTo(ObjectType.GROUP));
     }
 
     @Test
@@ -47,7 +45,7 @@ public class ActorBuilderTest {
                 .build();
         assertThat(actor, instanceOf(Actor.class));
 
-        assertThat(actor.getObjectType().get(), equalTo(ActorType.AGENT.toString()));
+        assertThat(actor.getObjectType().get(), equalTo(ObjectType.AGENT));
     }
 
     @Test
