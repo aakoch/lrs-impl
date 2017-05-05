@@ -1,5 +1,7 @@
 package com.adamkoch.lrs;
 
+import com.adamkoch.lrs.api.Sha1Sum;
+
 /**
  * <a href=""></a>
  *
@@ -36,7 +38,7 @@ public class MailToIriMbox implements com.adamkoch.lrs.api.Mbox {
     }
 
     @Override
-    public String getSha1Sum() {
+    public Sha1Sum getSha1Sum() {
         throw new NotYetImplementedException();
     }
 }

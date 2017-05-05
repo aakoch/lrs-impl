@@ -1,6 +1,7 @@
 package com.adamkoch.lrs;
 
 import com.adamkoch.lrs.api.Mbox;
+import com.adamkoch.lrs.api.Sha1Sum;
 
 import java.security.NoSuchAlgorithmException;
 
@@ -19,7 +20,7 @@ public class MboxFactory {
     }
 
     private static class MboxImpl implements Mbox {
-        private String sha1Sum;
+        private Sha1Sum sha1Sum;
 
         private MboxImpl(String s) {
             final MailToIRI iri = MailToIriCreator.of(s);
@@ -29,21 +30,21 @@ public class MboxFactory {
         }
 
         @Override
-        public String getSha1Sum() {
+        public Sha1Sum getSha1Sum() {
             return sha1Sum;
         }
 
-        private void setSha1Sum(String sha1Sum) {
+        private void setSha1Sum(Sha1Sum sha1Sum) {
             this.sha1Sum = sha1Sum;
         }
 
-        private static String calculateSha1String(String username, String domain) {
-            final Sha1Creator creator = instatiateCreator();
+        private static Sha1Sum calculateSha1String(String username, String domain) {
+            final Sha1Creator creator = instantiateCreator();
 
             return creator.getSha1("mailto:" + username + "@" + domain.toLowerCase());
         }
 
-        private static Sha1Creator instatiateCreator() {
+        private static Sha1Creator instantiateCreator() {
             final Sha1Creator creator;
             try {
                 creator = new Sha1Creator();

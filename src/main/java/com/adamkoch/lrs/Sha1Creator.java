@@ -1,5 +1,7 @@
 package com.adamkoch.lrs;
 
+import com.adamkoch.lrs.api.Sha1Sum;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -17,7 +19,7 @@ public class Sha1Creator {
         md = MessageDigest.getInstance("SHA");
     }
 
-    public String getSha1(String data) {
+    public Sha1Sum getSha1(String data) {
         StringBuilder sb = new StringBuilder(40);
         md.update(data.getBytes());
         byte[] digest = md.digest();
@@ -27,6 +29,8 @@ public class Sha1Creator {
             hex = hex.substring(hex.length() - 2);
             sb.append(hex);
         }
-        return sb.toString();
+        return StringSha1Sum.of(sb.toString());
     }
+
+
 }
