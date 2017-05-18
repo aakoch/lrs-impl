@@ -41,12 +41,12 @@ public class IdCreator {
 
             DefaultId defaultId = (DefaultId) o;
 
-            return id != null ? id.equals(defaultId.id) : defaultId.id == null;
+            return id == null ? defaultId.id == null : id.equals(defaultId.id);
         }
 
         @Override
         public int hashCode() {
-            return id != null ? id.hashCode() : 0;
+            return id == null ? 0 : id.hashCode();
         }
     }
 }
