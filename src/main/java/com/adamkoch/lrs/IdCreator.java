@@ -1,12 +1,13 @@
 package com.adamkoch.lrs;
 
-import com.adamkoch.lrs.api.InverseFunctionalIdentifier;
+import com.adamkoch.lrs.api.*;
 
+import java.security.NoSuchAlgorithmException;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
- * First pass at creating something that can create IDs. I haven't read the specs of the InverseFunctionalIdentifier
- * lately so this is just using UUID for now.
+ * Creates implementation of IFIs from inner class. This will probably be moved out at some point.
  *
  * <p>Created by aakoch on 2017-05-17.</p>
  *
@@ -15,23 +16,79 @@ import java.util.UUID;
  */
 public class IdCreator {
 
-    public static InverseFunctionalIdentifier create() {
-        return new DefaultId();
+    public static InverseFunctionalIdentifier from(MailToIRI iri) {
+        final DefaultIFI defaultIFI = new DefaultIFI();
+        defaultIFI.setMailtoIRI(iri);
+        return defaultIFI;
     }
 
-    public static InverseFunctionalIdentifier from(UUID uuid) {
-        return new DefaultId(uuid);
+    public static InverseFunctionalIdentifier from(Sha1Sum sha1Sum) {
+        final DefaultIFI defaultIFI = new DefaultIFI();
+        defaultIFI.setSha1Sum(sha1Sum);
+        return defaultIFI;
     }
 
-    private static class DefaultId implements InverseFunctionalIdentifier {
+    public static InverseFunctionalIdentifier from(Account account) {
+        final DefaultIFI defaultIFI = new DefaultIFI();
+        defaultIFI.setAccount(account);
+        return defaultIFI;
+    }
+
+    public static InverseFunctionalIdentifier from(OpenId openId) {
+        final DefaultIFI defaultIFI = new DefaultIFI();
+        defaultIFI.setOpenId(openId);
+        return defaultIFI;
+    }
+
+    private static class DefaultIFI implements InverseFunctionalIdentifier {
         private final UUID id;
+        private MailToIRI mailtoIRI;
+        private Sha1Sum sha1Sum;
+        private Account account;
+        private OpenId openId;
 
-        public DefaultId() {
+        public DefaultIFI() {
             id = UUID.randomUUID();
         }
 
-        public DefaultId(UUID uuid) {
+        public DefaultIFI(UUID uuid) {
             id = uuid;
+        }
+
+        @Override
+        public Optional<MailToIRI> getMBox() {
+            return Optional.ofNullable(mailtoIRI);
+        }
+
+        @Override
+        public Optional<Sha1Sum> getMboxSha1Sum() {
+            return Optional.ofNullable(sha1Sum);
+        }
+
+        @Override
+        public Optional<OpenId> getOpenId() {
+            return Optional.empty();
+        }
+
+        @Override
+        public Optional<Account> getAccount() {
+            return Optional.ofNullable(account);
+        }
+
+        public void setMailtoIRI(MailToIRI mailtoIRI) {
+            this.mailtoIRI = mailtoIRI;
+        }
+
+        public void setSha1Sum(Sha1Sum sha1Sum) {
+            this.sha1Sum = sha1Sum;
+        }
+
+        public void setAccount(Account account) {
+            this.account = account;
+        }
+
+        public void setOpenId(OpenId openId) {
+            this.openId = openId;
         }
 
         @Override
@@ -39,14 +96,65 @@ public class IdCreator {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
 
-            DefaultId defaultId = (DefaultId) o;
+            DefaultIFI that = (DefaultIFI) o;
 
-            return id == null ? defaultId.id == null : id.equals(defaultId.id);
+            boolean idsNotNullAndEqual = id != null && that.id != null && id.equals(that.id);
+            if (idsNotNullAndEqual) {
+                return true;
+            }
+
+            boolean mboxesNotNullAndEqual = mailtoIRI != null && that.mailtoIRI != null && mailtoIRI.equals(that
+                    .mailtoIRI);
+            if (mboxesNotNullAndEqual) {
+                return true;
+            }
+
+            boolean sha1SumsNotNullAndEqual = sha1Sum != null && that.sha1Sum != null && sha1Sum.equals(that.sha1Sum);
+            if (sha1SumsNotNullAndEqual) {
+                return true;
+            }
+
+            boolean accountsNotNullAndEqual = account != null && that.account != null && account.equals(that.account);
+            if (accountsNotNullAndEqual) {
+                return true;
+            }
+
+            boolean openIdsNotNullAndEqual = openId != null && that.openId != null && openId.equals(that.openId);
+            if (openIdsNotNullAndEqual) {
+                return true;
+            }
+
+            if (sha1Sum == null && that.sha1Sum != null) {
+                try {
+                    sha1Sum = (new Sha1Creator()).getSha1(mailtoIRI.toString());
+                } catch (NoSuchAlgorithmException e) {
+                    e.printStackTrace();
+                }
+                return sha1Sum.equals(that.sha1Sum);
+            }
+
+            if (that.sha1Sum == null && sha1Sum != null) {
+                Sha1Sum thatSha1Sum = null;
+                try {
+                    thatSha1Sum = (new Sha1Creator()).getSha1(that.mailtoIRI.toString());
+                } catch (NoSuchAlgorithmException e) {
+                    e.printStackTrace();
+                }
+                return sha1Sum.equals(thatSha1Sum);
+            }
+
+            return false;
         }
 
+        /**
+         * TODO: finish changing so contract with equals method is fulfilled.
+         */
         @Override
         public int hashCode() {
-            return id == null ? 0 : id.hashCode();
+            int result = id != null ? id.hashCode() : 0;
+            result = 31 * result + (mailtoIRI != null ? mailtoIRI.hashCode() : 0);
+            result = 31 * result + (sha1Sum != null ? sha1Sum.hashCode() : 0);
+            return result;
         }
     }
 }

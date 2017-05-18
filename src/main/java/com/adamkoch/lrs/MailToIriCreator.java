@@ -1,5 +1,6 @@
 package com.adamkoch.lrs;
 
+import com.adamkoch.lrs.api.MailToIRI;
 import org.apache.commons.lang3.StringUtils;
 
 /**

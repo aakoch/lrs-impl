@@ -18,10 +18,6 @@ public class DefaultIdentifiedGroup extends DefaultAnonymousGroup implements Ide
 
     private InverseFunctionalIdentifier id;
 
-    public DefaultIdentifiedGroup(Collection<Agent> members, String name) {
-        this(members, name, IdCreator.create());
-    }
-
     public DefaultIdentifiedGroup(Collection<Agent> members, String name, InverseFunctionalIdentifier id) {
         super(members, name);
         this.id = id;

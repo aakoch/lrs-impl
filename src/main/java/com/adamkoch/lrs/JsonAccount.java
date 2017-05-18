@@ -1,9 +1,6 @@
 package com.adamkoch.lrs;
 
-import com.adamkoch.lrs.api.Account;
-import com.adamkoch.lrs.api.InternationalizedResourceLocator;
-import com.adamkoch.lrs.api.JsonSerializable;
-import com.adamkoch.lrs.api.ObjectType;
+import com.adamkoch.lrs.api.*;
 
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
@@ -51,5 +48,25 @@ public class JsonAccount implements Account, JsonSerializable {
     @Override
     public JsonObject toJson(JsonObjectBuilder builder) {
         throw new NotYetImplementedException();
+    }
+
+    @Override
+    public Optional<MailToIRI> getMBox() {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Sha1Sum> getMboxSha1Sum() {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<OpenId> getOpenId() {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Account> getAccount() {
+        return Optional.empty();
     }
 }

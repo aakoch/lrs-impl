@@ -1,8 +1,5 @@
 package com.adamkoch.lrs.builders;
 
-import com.adamkoch.lrs.MailToIriCreator;
-import com.adamkoch.lrs.MailToIriMbox;
-import com.adamkoch.lrs.MboxActor;
 import com.adamkoch.lrs.api.Actor;
 import com.adamkoch.lrs.api.Agent;
 import com.adamkoch.lrs.api.Group;
@@ -42,11 +39,11 @@ public class ActorBuilder {
 //                An Agent MUST be identified by one (1) of the four types of Inverse Functional Identifiers (see 4.1.2.3 Inverse Functional Identifier);
 //                An Agent MUST NOT include more than one (1) Inverse Functional Identifier;
 
-                if ((mbox != null) ^ false ^ false) {
-                    MboxActor mboxActor = new MboxActor();
-                    mboxActor.setName(name);
-                    mboxActor.setId(new MailToIriMbox(MailToIriCreator.of(mbox)));
-                    actor = mboxActor;
+                if (mbox != null) {
+                    DefaultAgent agent = new DefaultAgent(new DefaultMailToIRI(mbox));
+                    agent.setName(name);
+
+                    actor = agent;
                 } else {
                     throw new IllegalArgumentException("Actor without mbox is not supported yet. TODO");
                 }
