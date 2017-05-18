@@ -7,6 +7,7 @@ import com.adamkoch.lrs.api.Verb;
 
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
+import java.util.Optional;
 
 /**
  * <a href="https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Data.md#243-verb">Verb</a>.
@@ -19,12 +20,12 @@ import javax.json.JsonObjectBuilder;
 public class JsonVerb implements Verb, JsonSerializable {
     @Override
     public InternationalizedResourceIdentifier getId() {
-        return null;
+        throw new NotYetImplementedException();
     }
 
     @Override
-    public LanguageMap getDisplay() {
-        return null;
+    public Optional<LanguageMap> getDisplay() {
+        throw new NotYetImplementedException();
     }
 
     @Override
