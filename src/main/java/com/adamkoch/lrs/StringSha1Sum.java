@@ -39,12 +39,12 @@ class StringSha1Sum implements Sha1Sum {
 
         StringSha1Sum that = (StringSha1Sum) o;
 
-        return str != null ? str.equals(that.str) : that.str == null;
+        return str == null ? that.str == null : str.equals(that.str);
     }
 
     @Override
     public int hashCode() {
-        return str != null ? str.hashCode() : 0;
+        return str == null ? 0 : str.hashCode();
     }
 
     @Override

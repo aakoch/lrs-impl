@@ -2,7 +2,10 @@ package com.adamkoch.lrs;
 
 import com.adamkoch.lrs.api.*;
 
-import javax.json.*;
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
+import javax.json.JsonWriter;
 import java.io.StringWriter;
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -210,19 +213,19 @@ public class JsonStatement implements Statement, JsonSerializable {
 
         JsonStatement statement = (JsonStatement) o;
 
-        if (statementId != null ? !statementId.equals(statement.statementId) : statement.statementId != null)
+        if (statementId == null ? statement.statementId != null : !statementId.equals(statement.statementId))
             return false;
-        if (timestamp != null ? !timestamp.equals(statement.timestamp) : statement.timestamp != null) return false;
-        if (actor != null ? !actor.equals(statement.actor) : statement.actor != null) return false;
-        if (object != null ? !object.equals(statement.object) : statement.object != null) return false;
-        if (result != null ? !result.equals(statement.result) : statement.result != null) return false;
-        if (context != null ? !context.equals(statement.context) : statement.context != null) return false;
-        if (stored != null ? !stored.equals(statement.stored) : statement.stored != null) return false;
-        if (authority != null ? !authority.equals(statement.authority) : statement.authority != null) return false;
-        if (attachments != null ? !attachments.equals(statement.attachments) : statement.attachments != null)
+        if (timestamp == null ? statement.timestamp != null : !timestamp.equals(statement.timestamp)) return false;
+        if (actor == null ? statement.actor != null : !actor.equals(statement.actor)) return false;
+        if (object == null ? statement.object != null : !object.equals(statement.object)) return false;
+        if (result == null ? statement.result != null : !result.equals(statement.result)) return false;
+        if (context == null ? statement.context != null : !context.equals(statement.context)) return false;
+        if (stored == null ? statement.stored != null : !stored.equals(statement.stored)) return false;
+        if (authority == null ? statement.authority != null : !authority.equals(statement.authority)) return false;
+        if (attachments == null ? statement.attachments != null : !attachments.equals(statement.attachments))
             return false;
-        if (verb != null ? !verb.equals(statement.verb) : statement.verb != null) return false;
-        return version != null ? version.equals(statement.version) : statement.version == null;
+        if (verb == null ? statement.verb != null : !verb.equals(statement.verb)) return false;
+        return version == null ? statement.version == null : version.equals(statement.version);
     }
 
     /**

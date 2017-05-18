@@ -34,7 +34,7 @@ public class MailToIriCreator {
 
             DefaultMailToIRI that = (DefaultMailToIRI) o;
 
-            return mbox != null ? mbox.equals(that.mbox) : that.mbox == null;
+            return mbox == null ? that.mbox == null : mbox.equals(that.mbox);
         }
 
         @Override

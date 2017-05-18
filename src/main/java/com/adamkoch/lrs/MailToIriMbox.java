@@ -29,12 +29,12 @@ public class MailToIriMbox implements com.adamkoch.lrs.api.Mbox {
 
         MailToIriMbox mbox = (MailToIriMbox) o;
 
-        return this.mbox != null ? this.mbox.equals(mbox.mbox) : mbox.mbox == null;
+        return this.mbox == null ? mbox.mbox == null : this.mbox.equals(mbox.mbox);
     }
 
     @Override
     public int hashCode() {
-        return mbox != null ? mbox.hashCode() : 0;
+        return mbox == null ? 0 : mbox.hashCode();
     }
 
     @Override
