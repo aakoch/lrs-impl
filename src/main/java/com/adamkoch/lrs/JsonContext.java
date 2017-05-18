@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * <a href=""></a>
+ * Implementation of Context interface with JSON helper methods.
  *
  * <p>Created by aakoch on 2017-04-24.</p>
  *

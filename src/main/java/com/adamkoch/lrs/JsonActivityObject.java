@@ -1,13 +1,14 @@
 package com.adamkoch.lrs;
 
-import com.adamkoch.lrs.api.*;
+import com.adamkoch.lrs.api.ActivityDefinition;
+import com.adamkoch.lrs.api.ActivityObject;
+import com.adamkoch.lrs.api.InternationalizedResourceIdentifier;
+import com.adamkoch.lrs.api.JsonSerializable;
 
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 
 /**
- * <a href=""></a>
- *
  * <p>Created by aakoch on 2017-04-24.</p>
  *
  * @author aakoch
