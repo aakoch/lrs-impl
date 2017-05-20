@@ -1,7 +1,7 @@
 package com.adamkoch.lrs.builders;
 
 import com.adamkoch.lrs.AbstractAgent;
-import com.adamkoch.lrs.api.MailToIRI;
+import com.adamkoch.lrs.api.InverseFunctionalIdentifier;
 
 import java.util.Optional;
 
@@ -12,11 +12,10 @@ import java.util.Optional;
  * @since 1.0.0
  */
 public class DefaultAgent extends AbstractAgent {
-    private final MailToIRI mailToIRI;
     private String name;
 
-    public DefaultAgent(MailToIRI mailToIRI) {
-        this.mailToIRI = mailToIRI;
+    public DefaultAgent(InverseFunctionalIdentifier id) {
+        super(id);
     }
 
     @Override

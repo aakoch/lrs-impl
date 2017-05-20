@@ -1,6 +1,7 @@
 package com.adamkoch.lrs;
 
 import com.adamkoch.lrs.api.Actor;
+import com.adamkoch.lrs.api.Agent;
 import com.adamkoch.lrs.api.ObjectType;
 import com.adamkoch.lrs.api.Statement;
 import org.junit.Assert;
@@ -45,7 +46,7 @@ public class FromJsonTest {
 
         assertEquals("Project Tin Can API", actor.getName().get());
         assertEquals(ObjectType.AGENT, actor.getObjectType().get());
-//        assertEquals(new MailToIriMbox(MailToIriCreator.of("mailto:user@example.com")), actor.getId());
+        assertEquals("mailto:user@example.com", ((Agent) actor).getId().toString());
     }
 
     @Test

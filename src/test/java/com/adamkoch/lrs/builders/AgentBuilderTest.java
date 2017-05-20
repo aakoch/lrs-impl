@@ -1,15 +1,13 @@
 package com.adamkoch.lrs.builders;
 
 import com.adamkoch.lrs.api.Account;
-import com.adamkoch.lrs.api.MailToIRI;
+import com.adamkoch.lrs.api.MailToIri;
 import com.adamkoch.lrs.api.OpenId;
 import org.junit.Test;
 
 import static org.mockito.Mockito.mock;
 
 /**
- * <a href=""></a>
- *
  * <p>Created by aakoch on 2017-04-28.</p>
  *
  * @author aakoch
@@ -24,7 +22,7 @@ public class AgentBuilderTest {
 
     @Test
     public void testAgentWithMbox() throws Exception {
-        MailToIRI mbox = mock(MailToIRI.class);
+        MailToIri mbox = mock(MailToIri.class);
         new AgentBuilder().mbox(mbox).build();
     }
 
@@ -47,7 +45,7 @@ public class AgentBuilderTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testAgentWithMultipleIFI_MboxAndOpenId() throws Exception {
-        MailToIRI mbox = mock(MailToIRI.class);
+        MailToIri mbox = mock(MailToIri.class);
         OpenId openId = mock(OpenId.class);
         new AgentBuilder().mbox(mbox).openId(openId).build();
     }

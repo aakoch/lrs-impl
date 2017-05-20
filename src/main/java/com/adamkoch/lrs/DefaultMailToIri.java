@@ -1,6 +1,6 @@
-package com.adamkoch.lrs.builders;
+package com.adamkoch.lrs;
 
-import com.adamkoch.lrs.api.MailToIRI;
+import com.adamkoch.lrs.api.MailToIri;
 
 /**
  * <a href=""></a>
@@ -10,10 +10,10 @@ import com.adamkoch.lrs.api.MailToIRI;
  * @author aakoch
  * @since 1.0.0
  */
-public class DefaultMailToIRI implements MailToIRI {
+public class DefaultMailToIri implements MailToIri {
     private final String mbox;
 
-    public DefaultMailToIRI(String mbox) {
+    public DefaultMailToIri(String mbox) {
         this.mbox = mbox;
     }
 
@@ -25,5 +25,10 @@ public class DefaultMailToIRI implements MailToIRI {
     @Override
     public String getUserName() {
         return null;
+    }
+
+    @Override
+    public String toString() {
+        return mbox;
     }
 }

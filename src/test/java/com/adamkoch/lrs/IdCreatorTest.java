@@ -17,7 +17,7 @@ public class IdCreatorTest {
 
     @Test
     public void testEquals_mailtoAndSha() throws NoSuchAlgorithmException {
-        MailToIRI mailtoIri = new MailToIRI() {
+        MailToIri mailtoIri = new MailToIri() {
             @Override
             public String getDomain() {
                 return null;
@@ -41,7 +41,7 @@ public class IdCreatorTest {
 
     @Test
     public void testEquals_mailtoAndSha_inverted() throws NoSuchAlgorithmException {
-        MailToIRI mailtoIri = new MailToIRI() {
+        MailToIri mailtoIri = new MailToIri() {
             @Override
             public String getDomain() {
                 return null;

@@ -41,7 +41,7 @@ public class ActorBuilderTest {
         Actor actor = builder
                 .type("Agent")
         // temporary?
-                .mbox("test")
+                .id("test")
                 .build();
         assertThat(actor, instanceOf(Actor.class));
 

@@ -16,7 +16,7 @@ import java.util.UUID;
  */
 public class IdCreator {
 
-    public static InverseFunctionalIdentifier from(MailToIRI iri) {
+    public static InverseFunctionalIdentifier from(MailToIri iri) {
         final DefaultIFI defaultIFI = new DefaultIFI();
         defaultIFI.setMailtoIRI(iri);
         return defaultIFI;
@@ -42,7 +42,7 @@ public class IdCreator {
 
     private static class DefaultIFI implements InverseFunctionalIdentifier {
         private final UUID id;
-        private MailToIRI mailtoIRI;
+        private MailToIri mailtoIRI;
         private Sha1Sum sha1Sum;
         private Account account;
         private OpenId openId;
@@ -56,7 +56,7 @@ public class IdCreator {
         }
 
         @Override
-        public Optional<MailToIRI> getMBox() {
+        public Optional<MailToIri> getMBox() {
             return Optional.ofNullable(mailtoIRI);
         }
 
@@ -75,7 +75,7 @@ public class IdCreator {
             return Optional.ofNullable(account);
         }
 
-        public void setMailtoIRI(MailToIRI mailtoIRI) {
+        public void setMailtoIRI(MailToIri mailtoIRI) {
             this.mailtoIRI = mailtoIRI;
         }
 
@@ -89,6 +89,23 @@ public class IdCreator {
 
         public void setOpenId(OpenId openId) {
             this.openId = openId;
+        }
+
+        @Override
+        public String toString() {
+            if (mailtoIRI != null)
+                return mailtoIRI.toString();
+
+            if (sha1Sum != null)
+                return sha1Sum.toString();
+
+            if (openId != null)
+                return openId.toString();
+
+            if (account != null)
+                return account.toString();
+
+            return id.toString();
         }
 
         @Override

@@ -17,6 +17,13 @@ public abstract class AbstractAgent implements Agent {
 
     private InverseFunctionalIdentifier id;
 
+    public AbstractAgent(InverseFunctionalIdentifier id) {
+        this.id = id;
+    }
+
+    protected AbstractAgent() {
+    }
+
     public InverseFunctionalIdentifier getId() {
         return id;
     }

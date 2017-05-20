@@ -83,7 +83,7 @@ public class JsonConverter {
         return new ActorBuilder()
                 .name(actorJsonObject.getString("name"))
                 .type(actorJsonObject.getString("objectType"))
-                .mbox(actorJsonObject.getString("mbox"))
+                .id(actorJsonObject.getString("mbox"))
                 .build();
     }
 }

@@ -15,7 +15,7 @@ import java.util.Optional;
  */
 public class AgentBuilder {
     private InverseFunctionalIdentifier id;
-    private MailToIRI mbox;
+    private MailToIri mbox;
     private Sha1Sum sha1;
     private Account account;
     private OpenId openId;
@@ -41,7 +41,7 @@ public class AgentBuilder {
         return Arrays.stream(objects).filter(Objects::isNull).count();
     }
 
-    public AgentBuilder mbox(MailToIRI mbox) {
+    public AgentBuilder mbox(MailToIri mbox) {
         this.mbox = mbox;
 
         return this;

@@ -1,9 +1,8 @@
 package com.adamkoch.lrs.builders;
 
-import com.adamkoch.lrs.api.Actor;
-import com.adamkoch.lrs.api.Agent;
-import com.adamkoch.lrs.api.Group;
-import com.adamkoch.lrs.api.ObjectType;
+import com.adamkoch.lrs.IdCreator;
+import com.adamkoch.lrs.MailToIriFactory;
+import com.adamkoch.lrs.api.*;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -40,7 +39,8 @@ public class ActorBuilder {
 //                An Agent MUST NOT include more than one (1) Inverse Functional Identifier;
 
                 if (mbox != null) {
-                    DefaultAgent agent = new DefaultAgent(new DefaultMailToIRI(mbox));
+                    InverseFunctionalIdentifier id = IdCreator.from(MailToIriFactory.of(mbox));
+                    DefaultAgent agent = new DefaultAgent(id);
                     agent.setName(name);
 
                     actor = agent;
@@ -80,7 +80,7 @@ public class ActorBuilder {
         return this;
     }
 
-    public ActorBuilder mbox(String mbox) {
+    public ActorBuilder id(String mbox) {
         this.mbox = mbox;
         return this;
     }
