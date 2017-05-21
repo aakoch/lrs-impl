@@ -51,7 +51,7 @@ public class JsonAccount implements Account, JsonSerializable {
     }
 
     @Override
-    public Optional<MailToIRI> getMBox() {
+    public Optional<MailToIri> getMBox() {
         return Optional.empty();
     }
 

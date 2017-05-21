@@ -13,6 +13,8 @@ import com.adamkoch.lrs.api.LanguageTag;
  * @since 1.0.0
  */
 public class LanguageTagFactory {
+    public static final LanguageTag EN_US = of("en-US");
+
     public static LanguageTag of(String tag) {
         return new NonValidatingLanguageTag(tag);
     }

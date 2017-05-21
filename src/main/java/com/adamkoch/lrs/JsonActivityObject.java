@@ -1,7 +1,7 @@
 package com.adamkoch.lrs;
 
+import com.adamkoch.lrs.api.Activity;
 import com.adamkoch.lrs.api.ActivityDefinition;
-import com.adamkoch.lrs.api.ActivityObject;
 import com.adamkoch.lrs.api.InternationalizedResourceIdentifier;
 import com.adamkoch.lrs.api.JsonSerializable;
 
@@ -14,20 +14,31 @@ import javax.json.JsonObjectBuilder;
  * @author aakoch
  * @since 1.0.0
  */
-public class JsonActivityObject implements ActivityObject, JsonSerializable {
+public class JsonActivityObject implements Activity, JsonSerializable {
+
+    private ActivityDefinition definition;
+    private InternationalizedResourceIdentifier id;
 
     @Override
     public InternationalizedResourceIdentifier getId() {
-        throw new NotYetImplementedException();
+        return id;
     }
 
     @Override
     public ActivityDefinition getDefinition() {
-        throw new NotYetImplementedException();
+        return definition;
     }
 
     @Override
     public JsonObject toJson(JsonObjectBuilder builder) {
         throw new NotYetImplementedException();
+    }
+
+    public void setDefinition(ActivityDefinition definition) {
+        this.definition = definition;
+    }
+
+    public void setId(InternationalizedResourceIdentifier id) {
+        this.id = id;
     }
 }

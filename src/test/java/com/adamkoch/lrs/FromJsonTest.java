@@ -40,10 +40,16 @@ public class FromJsonTest {
         assertNotNull(verb);
         assertEquals("http://example.com/xapi/verbs#sent-a-statement", verb.getId().toString());
         final LanguageMap display = verb.getDisplay().get();
-        assertEquals("sent", display.get(LanguageTagFactory.of("en-US")));
+        assertEquals("sent", display.get(LanguageTagFactory.EN_US));
 
         // test object - separate test?
-        assertNotNull(statement.getObject());
+        final Activity lrsObject = (Activity) statement.getObject();
+        assertNotNull(lrsObject);
+        assertEquals("http://example.com/xapi/activity/simplestatement", lrsObject.getId().toString());
+        assertEquals(IriFactory.of("http://example.com/xapi/activity/simplestatement"), lrsObject.getId());
+        final ActivityDefinition definition = lrsObject.getDefinition();
+        assertEquals("simple statement", definition.getName().get(LanguageTagFactory.EN_US));
+        assertEquals("A simple Experience API statement. Note that the LRS does not need to have any prior information about the Actor (learner), the verb, or the Activity/object.", definition.getDescription().get(LanguageTagFactory.EN_US));
     }
 
     @Test

@@ -31,8 +31,7 @@ public class JsonConverter {
 
         Verb verb = convertToVerb(jsonObject.getJsonObject("verb"));
 
-        JsonObject objectJsonObject = jsonObject.getJsonObject("object");
-        LrsObject object = new ObjectBuilder().build();
+        LrsObject object = convertToObject(jsonObject.getJsonObject("object"));
 
         JsonObject resultJsonObject = jsonObject.getJsonObject("result");
         Result result = new ResultBuilder().build();
@@ -75,6 +74,18 @@ public class JsonConverter {
 
         LOGGER.debug("jsonObject = " + jsonObject);
         return statement;
+    }
+
+    private static LrsObject convertToObject(JsonObject objectJsonObject) {
+        return new ObjectBuilder()
+                .id(objectJsonObject.getString("id"))
+                .definition(createDefinition(objectJsonObject.getJsonObject("definition")))
+                .build();
+    }
+
+    private static ActivityDefinition createDefinition(JsonObject jsonObject) {
+        ActivityDefinition definition = ActivityDefinitionFactory.of(jsonObject);
+        return definition;
     }
 
     private static Verb convertToVerb(JsonObject verbJsonObject) {

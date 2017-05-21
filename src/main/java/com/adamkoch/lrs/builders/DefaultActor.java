@@ -1,7 +1,7 @@
 package com.adamkoch.lrs.builders;
 
 import com.adamkoch.lrs.api.Actor;
-import com.adamkoch.lrs.api.MailToIRI;
+import com.adamkoch.lrs.api.MailToIri;
 import com.adamkoch.lrs.api.ObjectType;
 
 import java.util.Optional;
@@ -15,9 +15,9 @@ import java.util.Optional;
  * @since 1.0.0
  */
 public class DefaultActor implements Actor {
-    private final MailToIRI mailToIRI;
+    private final MailToIri mailToIRI;
 
-    public DefaultActor(MailToIRI mailToIRI) {
+    public DefaultActor(MailToIri mailToIRI) {
         this.mailToIRI = mailToIRI;
     }
 
