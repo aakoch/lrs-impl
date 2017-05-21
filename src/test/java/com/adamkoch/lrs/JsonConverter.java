@@ -29,8 +29,7 @@ public class JsonConverter {
 
         Actor actor = convertToActor(jsonObject.getJsonObject("actor"));
 
-        JsonObject verbJsonObject = jsonObject.getJsonObject("verb");
-        Verb verb = new VerbBuilder().build();
+        Verb verb = convertToVerb(jsonObject.getJsonObject("verb"));
 
         JsonObject objectJsonObject = jsonObject.getJsonObject("object");
         LrsObject object = new ObjectBuilder().build();
@@ -76,6 +75,14 @@ public class JsonConverter {
 
         LOGGER.debug("jsonObject = " + jsonObject);
         return statement;
+    }
+
+    private static Verb convertToVerb(JsonObject verbJsonObject) {
+        final InternationalizedResourceIdentifier id = IriFactory.of(verbJsonObject.getString("id"));
+        return new VerbBuilder()
+                .display(new LanguageMapBuilder().of(verbJsonObject.getJsonObject("display")))
+                .id(id)
+                .build();
     }
 
     public static Actor convertToActor(JsonObject actorJsonObject) {

@@ -1,10 +1,6 @@
 package com.adamkoch.lrs;
 
-import com.adamkoch.lrs.api.Actor;
-import com.adamkoch.lrs.api.Agent;
-import com.adamkoch.lrs.api.ObjectType;
-import com.adamkoch.lrs.api.Statement;
-import org.junit.Assert;
+import com.adamkoch.lrs.api.*;
 import org.junit.Test;
 
 import javax.json.Json;
@@ -14,6 +10,7 @@ import java.io.InputStream;
 import java.time.LocalDateTime;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by aakoch on 2017-03-22.
@@ -32,11 +29,21 @@ public class FromJsonTest {
         assertEquals(StatementId.of("fd41c918-b88b-4b20-a0a5-a4c32391aaa0"), statement.getId());
         assertEquals(LocalDateTime.parse("2015-11-18T12:17"), statement.getTimestamp());
         // test actor - separate test?
-        Assert.assertNotNull(statement.getActor());
+        Actor actor = statement.getActor();
+        assertNotNull(actor);
+        assertEquals("Project Tin Can API", actor.getName().get());
+        assertEquals("Agent", actor.getObjectType().get().toString());
+        assertEquals("mailto:user@example.com", ((Agent) actor).getId().getMBox().get().toString());
+
         // test verb - separate test?
-        Assert.assertNotNull(statement.getVerb());
+        final Verb verb = statement.getVerb();
+        assertNotNull(verb);
+        assertEquals("http://example.com/xapi/verbs#sent-a-statement", verb.getId().toString());
+        final LanguageMap display = verb.getDisplay().get();
+        assertEquals("sent", display.get(LanguageTagFactory.of("en-US")));
+
         // test object - separate test?
-        Assert.assertNotNull(statement.getObject());
+        assertNotNull(statement.getObject());
     }
 
     @Test
@@ -57,21 +64,21 @@ public class FromJsonTest {
         assertEquals(StatementId.of("6690e6c9-3ef0-4ed3-8b37-7f3964730bee"), statement.getId());
         assertEquals(LocalDateTime.parse("2013-05-18T05:32:34.804"), statement.getTimestamp());
         // test actor - separate test?
-        Assert.assertNotNull(statement.getActor());
+        assertNotNull(statement.getActor());
         // test verb - separate test?
-        Assert.assertNotNull(statement.getVerb());
+        assertNotNull(statement.getVerb());
         // test result - separate test?
-        Assert.assertNotNull(statement.getResult());
+        assertNotNull(statement.getResult());
         // test context - separate test?
-        Assert.assertNotNull(statement.getContext());
+        assertNotNull(statement.getContext());
         // test stored
         assertEquals(LocalDateTime.parse("2013-05-18T05:32:34.804"), statement.getStored());
         // test authority - separate test?
-        Assert.assertNotNull(statement.getAuthority());
+        assertNotNull(statement.getAuthority());
         // test version
         assertEquals("1.0.0", statement.getVersion());
         // test object - separate test?
-        Assert.assertNotNull(statement.getObject());
+        assertNotNull(statement.getObject());
     }
 
     private JsonObject readFromFileToJsonObject(String filename) {

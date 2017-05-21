@@ -18,18 +18,29 @@ import java.util.Optional;
  * @since 1.0.0
  */
 public class JsonVerb implements Verb, JsonSerializable {
+    private LanguageMap display;
+    private InternationalizedResourceIdentifier id;
+
     @Override
     public InternationalizedResourceIdentifier getId() {
-        throw new NotYetImplementedException();
+        return id;
     }
 
     @Override
     public Optional<LanguageMap> getDisplay() {
-        throw new NotYetImplementedException();
+        return Optional.ofNullable(display);
     }
 
     @Override
     public JsonObject toJson(JsonObjectBuilder builder) {
         throw new NotYetImplementedException();
+    }
+
+    public void setDisplay(LanguageMap display) {
+        this.display = display;
+    }
+
+    public void setId(InternationalizedResourceIdentifier id) {
+        this.id = id;
     }
 }
