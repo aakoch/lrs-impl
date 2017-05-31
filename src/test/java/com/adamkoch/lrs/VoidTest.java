@@ -1,6 +1,7 @@
 package com.adamkoch.lrs;
 
 import com.adamkoch.lrs.api.LanguageMap;
+import com.adamkoch.lrs.factories.LanguageTagFactory;
 import org.junit.Test;
 
 import java.util.Optional;

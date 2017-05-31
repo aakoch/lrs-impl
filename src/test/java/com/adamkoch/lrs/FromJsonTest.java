@@ -1,6 +1,9 @@
 package com.adamkoch.lrs;
 
 import com.adamkoch.lrs.api.*;
+import com.adamkoch.lrs.factories.IriFactory;
+import com.adamkoch.lrs.factories.IrlFactory;
+import com.adamkoch.lrs.factories.LanguageTagFactory;
 import org.junit.Test;
 
 import javax.json.Json;
@@ -8,9 +11,9 @@ import javax.json.JsonObject;
 import javax.json.JsonReader;
 import java.io.InputStream;
 import java.time.LocalDateTime;
+import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 /**
  * Created by aakoch on 2017-03-22.
@@ -19,6 +22,25 @@ import static org.junit.Assert.assertNotNull;
  * @since 1.0.0
  */
 public class FromJsonTest {
+
+    @Test
+    public void testAuthorityAccount() {
+        JsonObject jsonObject = readFromFileToJsonObject("examples/authority_account.json");
+        Authority authority = JsonConverter.convertToAuthority(jsonObject);
+        assertNotNull(authority);
+        assertEquals(ObjectType.AGENT, authority.getObjectType().get());
+        assertTrue(authority.getId().getAccount().isPresent());
+
+        // TODO: maybe create another authority as a group
+    }
+
+    @Test
+    public void testGroup() {
+        JsonObject jsonObject = readFromFileToJsonObject("examples/complex_group.json");
+        Group group = JsonConverter.convertToGroup(jsonObject);
+        assertNotNull(group);
+        assertEquals(3, group.getMember().size());
+    }
 
     @Test
     public void testSimpleStatement() {
@@ -71,20 +93,57 @@ public class FromJsonTest {
         assertEquals(LocalDateTime.parse("2013-05-18T05:32:34.804"), statement.getTimestamp());
         // test actor - separate test?
         assertNotNull(statement.getActor());
+
         // test verb - separate test?
         assertNotNull(statement.getVerb());
+
         // test result - separate test?
         assertNotNull(statement.getResult());
+
         // test context - separate test?
         assertNotNull(statement.getContext());
+
         // test stored
         assertEquals(LocalDateTime.parse("2013-05-18T05:32:34.804"), statement.getStored());
+
         // test authority - separate test?
-        assertNotNull(statement.getAuthority());
+        final Authority authority = statement.getAuthority();
+        assertNotNull(authority);
+        assertEquals(ObjectType.AGENT, authority.getObjectType().get());
+
+//        Actor agent = (Actor) authority;
+//
+//        final InverseFunctionalIdentifier agentId = agent.getId();
+//        assertNotNull(agentId);
+//        Account agentAccount = (Account) agent;
+//        assertEquals("anonymous", agentAccount.getName());
+
         // test version
         assertEquals("1.0.0", statement.getVersion());
+
         // test object - separate test?
-        assertNotNull(statement.getObject());
+        final Activity activity = (Activity) statement.getObject();
+        assertNotNull(activity);
+        assertEquals("http://www.example.com/meetings/occurances/34534", activity.getId().toString());
+        assertEquals(IriFactory.of("http://www.example.com/meetings/occurances/34534"), activity.getId());
+        final ActivityDefinition definition = activity.getDefinition();
+        assertNotNull(definition);
+        final LanguageMap nameLanguageMap = definition.getName();
+        assertNotNull(nameLanguageMap);
+        assertEquals("example meeting", nameLanguageMap.get(LanguageTagFactory.EN_US));
+        assertEquals("example meeting", nameLanguageMap.get(LanguageTagFactory.EN_GB));
+        final LanguageMap descriptionLanguageMap = definition.getDescription();
+        assertEquals("An example meeting that happened on a specific occasion with certain people present.", descriptionLanguageMap.get(LanguageTagFactory.EN_US));
+        assertEquals("An example meeting that happened on a specific occasion with certain people present.",
+                descriptionLanguageMap.get(LanguageTagFactory.EN_GB));
+        final InternationalizedResourceIdentifier definitionType = definition.getType();
+        assertEquals(IriFactory.of("http://adlnet.gov/expapi/activities/meeting"), definitionType);
+        final InternationalizedResourceLocator moreInfo = definition.getMoreInfo();
+        assertEquals(IrlFactory.of("http://virtualmeeting.example.com/345256"), moreInfo);
+
+        final Extensions extensions = definition.getExtensions();
+        final Set<InternationalizedResourceIdentifier> extensionKeySet = extensions.keySet();
+        assertEquals(1, extensionKeySet.size());
     }
 
     private JsonObject readFromFileToJsonObject(String filename) {

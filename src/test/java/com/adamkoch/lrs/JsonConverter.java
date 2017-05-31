@@ -2,12 +2,18 @@ package com.adamkoch.lrs;
 
 import com.adamkoch.lrs.api.*;
 import com.adamkoch.lrs.builders.*;
+import com.adamkoch.lrs.factories.ActivityDefinitionFactory;
+import com.adamkoch.lrs.factories.IriFactory;
+import com.adamkoch.lrs.factories.IrlFactory;
+import com.adamkoch.lrs.factories.MailToIriFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.json.JsonObject;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * <p>Created by aakoch on 2017-03-23.</p>
@@ -39,8 +45,13 @@ public class JsonConverter {
         JsonObject contextJsonObject = jsonObject.getJsonObject("context");
         Context context = new ContextBuilder().build();
 
-        JsonObject authorityJsonObject = jsonObject.getJsonObject("authority");
-        Authority authority = new AuthorityBuilder().build();
+        Authority authority;
+        if (jsonObject.containsKey("authority")) {
+            authority = createAuthority(jsonObject);
+        }
+        else {
+            authority = null;
+        }
 
 
         final LocalDateTime storedLocalDateTime;
@@ -76,6 +87,37 @@ public class JsonConverter {
         return statement;
     }
 
+    private static Authority createAuthority(JsonObject jsonObject) {
+        Authority authority;
+        JsonObject authorityJsonObject = jsonObject.getJsonObject("authority");
+        final String authorityObjectType = authorityJsonObject.getString("objectType");
+
+        if (authorityObjectType.equals(ObjectType.AGENT.toString())) {
+            // the authority is an Agent
+            // an agent has an ID
+            // the ID is an account, or mailbox, etc
+        }
+        else if (authorityObjectType.equals(ObjectType.GROUP.toString())) {
+            // the authority is a Group
+            // can the group be anonymous?
+        }
+
+        if (authorityJsonObject.containsKey("account")) {
+            final JsonObject jsonAccount = authorityJsonObject.getJsonObject("account");
+            JsonAccount account = new JsonAccount();
+            account.setName(jsonAccount.getString("name"));
+            account.setHomePage(IrlFactory.of(jsonAccount.getString("homePage")));
+            authority = new AuthorityBuilder().objectType(ObjectType.of(authorityObjectType))
+                                              .id(IdCreator.from(account))
+                                              .build();
+        }
+        else {
+            authority = null;
+        }
+
+        return authority;
+    }
+
     private static LrsObject convertToObject(JsonObject objectJsonObject) {
         return new ObjectBuilder()
                 .id(objectJsonObject.getString("id"))
@@ -103,5 +145,32 @@ public class JsonConverter {
                 .type(actorJsonObject.getString("objectType"))
                 .id(actorJsonObject.getString("mbox"))
                 .build();
+    }
+
+    public static Authority convertToAuthority(JsonObject jsonObject) {
+        InverseFunctionalIdentifier id;
+        if (isAccount(jsonObject)) {
+            Account account = new AccountBuilder().build();
+            id = IdCreator.from(account);
+        }
+        else {
+            id = null;
+        }
+        return new AuthorityBuilder().objectType(ObjectType.of(jsonObject.getString("objectType"))).id(id).build();
+    }
+
+    private static boolean isAccount(JsonObject jsonObject) {
+        return true;
+    }
+
+    public static Group convertToGroup(JsonObject jsonObject) {
+        Group group = null;
+        if (jsonObject.containsKey("mbox")) {
+            Collection<Agent> members = new ArrayList<>();
+            String name = jsonObject.getString("name");
+            InverseFunctionalIdentifier id = IdCreator.from(MailToIriFactory.of(jsonObject.getString("mbox")));
+            group = new DefaultIdentifiedGroup(members, name, id);
+        }
+        return group;
     }
 }

@@ -1,9 +1,9 @@
 package com.adamkoch.lrs.builders;
 
-import com.adamkoch.lrs.IriFactory;
 import com.adamkoch.lrs.JsonActivityObject;
 import com.adamkoch.lrs.api.ActivityDefinition;
 import com.adamkoch.lrs.api.LrsObject;
+import com.adamkoch.lrs.factories.IriFactory;
 
 /**
  * <p>Created by aakoch on 2017-03-23.</p>

@@ -1,22 +1,23 @@
-package com.adamkoch.lrs;
+package com.adamkoch.lrs.factories;
 
-import com.adamkoch.lrs.api.InternationalizedResourceIdentifier;
+import com.adamkoch.lrs.api.InternationalizedResourceLocator;
 
 /**
- * <p>Created by aakoch on 2017-05-20.</p>
+ *
+ * <p>Created by aakoch on 2017-05-30.</p>
  *
  * @author aakoch
  * @since 1.0.0
  */
-public class IriFactory {
-    public static InternationalizedResourceIdentifier of(String id) {
-        return new MyInternationalizedResourceIdentifier(id);
+public class IrlFactory {
+    public static InternationalizedResourceLocator of(String irl) {
+        return new MyInternationalizedResourceLocator(irl);
     }
 
-    private static class MyInternationalizedResourceIdentifier implements InternationalizedResourceIdentifier {
+    private static class MyInternationalizedResourceLocator implements InternationalizedResourceLocator {
         private final String id;
 
-        public MyInternationalizedResourceIdentifier(String id) {
+        public MyInternationalizedResourceLocator(String id) {
             this.id = id;
         }
 
@@ -30,7 +31,7 @@ public class IriFactory {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
 
-            MyInternationalizedResourceIdentifier that = (MyInternationalizedResourceIdentifier) o;
+            MyInternationalizedResourceLocator that = (MyInternationalizedResourceLocator) o;
 
             return id != null ? id.equals(that.id) : that.id == null;
         }

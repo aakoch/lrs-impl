@@ -1,8 +1,7 @@
-package com.adamkoch.lrs;
+package com.adamkoch.lrs.builders;
 
 import com.adamkoch.lrs.api.Actor;
 import com.adamkoch.lrs.api.ObjectType;
-import com.adamkoch.lrs.builders.ActorBuilder;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;

@@ -1,4 +1,4 @@
-package com.adamkoch.lrs;
+package com.adamkoch.lrs.factories;
 
 import com.adamkoch.lrs.api.LanguageTag;
 
@@ -14,6 +14,7 @@ import com.adamkoch.lrs.api.LanguageTag;
  */
 public class LanguageTagFactory {
     public static final LanguageTag EN_US = of("en-US");
+    public static final LanguageTag EN_GB = of("en-GB");
 
     public static LanguageTag of(String tag) {
         return new NonValidatingLanguageTag(tag);

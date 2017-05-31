@@ -1,8 +1,10 @@
-package com.adamkoch.lrs;
+package com.adamkoch.lrs.builders;
 
+import com.adamkoch.lrs.AbstractAgent;
+import com.adamkoch.lrs.JsonVerb;
+import com.adamkoch.lrs.NotYetImplementedException;
+import com.adamkoch.lrs.StatementId;
 import com.adamkoch.lrs.api.*;
-import com.adamkoch.lrs.builders.ActorBuilder;
-import com.adamkoch.lrs.builders.StatementBuilder;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
@@ -25,7 +27,7 @@ public class StatementBuilderTest {
 
     @Test
     public void testBuild() throws Exception {
-        StatementId testStatementId = new StatementId(UUID.randomUUID());
+        StatementId testStatementId = StatementId.of(UUID.randomUUID().toString());
         LocalDateTime testTimestamp = LocalDateTime.now();
         Actor testActor = new ActorBuilder().type(ObjectType.AGENT.toString()).id("mailto:test@example.com").build();
         LrsObject testLrsObject = new AbstractAgent() {

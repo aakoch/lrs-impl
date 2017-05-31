@@ -1,5 +1,6 @@
-package com.adamkoch.lrs;
+package com.adamkoch.lrs.factories;
 
+import com.adamkoch.lrs.NotYetImplementedException;
 import com.adamkoch.lrs.api.*;
 import com.adamkoch.lrs.builders.LanguageMapBuilder;
 
@@ -17,6 +18,18 @@ public class ActivityDefinitionFactory {
         final DefaultActivityDefinition definition = new DefaultActivityDefinition();
         definition.setName(convertToLanguageMap(jsonObject.getJsonObject("name")));
         definition.setDescription(convertToLanguageMap(jsonObject.getJsonObject("description")));
+        if (jsonObject.containsKey("type")) {
+            final String type = jsonObject.getString("type");
+            definition.setType(IriFactory.of(type));
+        }
+        if (jsonObject.containsKey("moreInfo")) {
+            final String moreInfo = jsonObject.getString("moreInfo");
+            definition.setMoreInfo(IrlFactory.of(moreInfo));
+        }
+        if (jsonObject.containsKey("extensions")) {
+            final JsonObject extensions = jsonObject.getJsonObject("extensions");
+            definition.setExtensions(ExtensionsFactory.of(extensions));
+        }
         return definition;
     }
 
@@ -27,6 +40,9 @@ public class ActivityDefinitionFactory {
     private static class DefaultActivityDefinition implements ActivityDefinition {
         private LanguageMap name;
         private LanguageMap description;
+        private InternationalizedResourceIdentifier type;
+        private InternationalizedResourceLocator moreInfo;
+        private Extensions extensions;
 
         @Override
         public LanguageMap getName() {
@@ -40,17 +56,17 @@ public class ActivityDefinitionFactory {
 
         @Override
         public InternationalizedResourceIdentifier getType() {
-            throw new NotYetImplementedException();
+            return type;
         }
 
         @Override
         public InternationalizedResourceLocator getMoreInfo() {
-            throw new NotYetImplementedException();
+            return moreInfo;
         }
 
         @Override
-        public LrsObject getExtensions() {
-            throw new NotYetImplementedException();
+        public Extensions getExtensions() {
+            return extensions;
         }
 
         @Override
@@ -64,6 +80,18 @@ public class ActivityDefinitionFactory {
 
         public void setDescription(LanguageMap description) {
             this.description = description;
+        }
+
+        public void setType(InternationalizedResourceIdentifier type) {
+            this.type = type;
+        }
+
+        public void setMoreInfo(InternationalizedResourceLocator moreInfo) {
+            this.moreInfo = moreInfo;
+        }
+
+        public void setExtensions(Extensions extensions) {
+            this.extensions = extensions;
         }
     }
 }

@@ -1,8 +1,8 @@
 package com.adamkoch.lrs.builders;
 
 import com.adamkoch.lrs.IdCreator;
-import com.adamkoch.lrs.MailToIriFactory;
 import com.adamkoch.lrs.api.*;
+import com.adamkoch.lrs.factories.MailToIriFactory;
 
 import java.util.Collection;
 import java.util.Collections;

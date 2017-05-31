@@ -3,6 +3,7 @@ package com.adamkoch.lrs;
 import com.adamkoch.lrs.api.InternationalizedResourceIdentifier;
 import com.adamkoch.lrs.api.LanguageMap;
 import com.adamkoch.lrs.api.Verb;
+import com.adamkoch.lrs.factories.LanguageTagFactory;
 
 import java.util.Optional;
 

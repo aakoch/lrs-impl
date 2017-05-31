@@ -1,9 +1,9 @@
 package com.adamkoch.lrs.builders;
 
 import com.adamkoch.lrs.DefaultLanguageMap;
-import com.adamkoch.lrs.LanguageTagFactory;
 import com.adamkoch.lrs.api.LanguageMap;
 import com.adamkoch.lrs.api.LanguageTag;
+import com.adamkoch.lrs.factories.LanguageTagFactory;
 
 import javax.json.JsonObject;
 import javax.json.JsonValue;

@@ -1,5 +1,6 @@
-package com.adamkoch.lrs;
+package com.adamkoch.lrs.factories;
 
+import com.adamkoch.lrs.DefaultMailToIri;
 import com.adamkoch.lrs.api.MailToIri;
 
 /**
