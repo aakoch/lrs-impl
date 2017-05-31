@@ -10,13 +10,13 @@ import com.adamkoch.lrs.api.InternationalizedResourceIdentifier;
  */
 public class IriFactory {
     public static InternationalizedResourceIdentifier of(String id) {
-        return new MyInternationalizedResourceIdentifier(id);
+        return new DefaultInternationalizedResourceIdentifier(id);
     }
 
-    private static class MyInternationalizedResourceIdentifier implements InternationalizedResourceIdentifier {
+    private static class DefaultInternationalizedResourceIdentifier implements InternationalizedResourceIdentifier {
         private final String id;
 
-        public MyInternationalizedResourceIdentifier(String id) {
+        public DefaultInternationalizedResourceIdentifier(String id) {
             this.id = id;
         }
 
@@ -30,7 +30,7 @@ public class IriFactory {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
 
-            MyInternationalizedResourceIdentifier that = (MyInternationalizedResourceIdentifier) o;
+            DefaultInternationalizedResourceIdentifier that = (DefaultInternationalizedResourceIdentifier) o;
 
             return id != null ? id.equals(that.id) : that.id == null;
         }

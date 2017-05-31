@@ -33,7 +33,7 @@ public class AgentBuilder {
         if (numberOfNulls < 3) {
             throw new IllegalArgumentException("Too many IFIs");
         }
-        InnerAgent agent = new InnerAgent();
+        DefaultAgent agent = new DefaultAgent();
         return agent;
     }
 
@@ -62,10 +62,10 @@ public class AgentBuilder {
         return this;
     }
 
-    private class InnerAgent extends AbstractAgent {
+    private class DefaultAgent extends AbstractAgent {
         private Optional<String> name;
 
-        InnerAgent() {
+        DefaultAgent() {
             name = Optional.empty();
         }
 

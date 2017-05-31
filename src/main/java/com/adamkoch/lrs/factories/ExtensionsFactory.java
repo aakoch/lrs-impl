@@ -18,21 +18,20 @@ import java.util.Set;
  */
 public class ExtensionsFactory {
     public static Extensions of(JsonObject jsonObject) {
-        final MyExtensions extensions = new MyExtensions();
+        final DefaultExtensions extensions = new DefaultExtensions();
         for (Map.Entry<String, JsonValue> entry : jsonObject.entrySet()) {
             final String key = entry.getKey();
             InternationalizedResourceIdentifier iri = IriFactory.of(key);
             extensions.put(iri, jsonObject.getJsonObject(key));
         }
-
         return extensions;
     }
 
-    private static class MyExtensions implements Extensions {
+    private static class DefaultExtensions implements Extensions {
 
         private final HashMap<InternationalizedResourceIdentifier, JsonObject> map;
 
-        private MyExtensions() {
+        private DefaultExtensions() {
             map = new HashMap<InternationalizedResourceIdentifier, JsonObject>();
         }
 

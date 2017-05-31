@@ -11,13 +11,13 @@ import com.adamkoch.lrs.api.InternationalizedResourceLocator;
  */
 public class IrlFactory {
     public static InternationalizedResourceLocator of(String irl) {
-        return new MyInternationalizedResourceLocator(irl);
+        return new DefaultInternationalizedResourceLocator(irl);
     }
 
-    private static class MyInternationalizedResourceLocator implements InternationalizedResourceLocator {
+    private static class DefaultInternationalizedResourceLocator implements InternationalizedResourceLocator {
         private final String id;
 
-        public MyInternationalizedResourceLocator(String id) {
+        public DefaultInternationalizedResourceLocator(String id) {
             this.id = id;
         }
 
@@ -31,7 +31,7 @@ public class IrlFactory {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
 
-            MyInternationalizedResourceLocator that = (MyInternationalizedResourceLocator) o;
+            DefaultInternationalizedResourceLocator that = (DefaultInternationalizedResourceLocator) o;
 
             return id != null ? id.equals(that.id) : that.id == null;
         }
