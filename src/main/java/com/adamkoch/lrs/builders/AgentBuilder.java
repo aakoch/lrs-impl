@@ -1,6 +1,7 @@
 package com.adamkoch.lrs.builders;
 
 import com.adamkoch.lrs.AbstractAgent;
+import com.adamkoch.lrs.IdCreator;
 import com.adamkoch.lrs.api.*;
 
 import java.util.Arrays;
@@ -19,6 +20,7 @@ public class AgentBuilder {
     private Sha1Sum sha1;
     private Account account;
     private OpenId openId;
+    private String name;
 
     // An Agent MUST be identified by one (1) of the four types of Inverse Functional Identifiers (see 4.1.2.3 Inverse
     // Functional Identifier);
@@ -34,6 +36,26 @@ public class AgentBuilder {
             throw new IllegalArgumentException("Too many IFIs");
         }
         DefaultAgent agent = new DefaultAgent();
+        if (name != null) {
+            agent.setName(name);
+        }
+        final InverseFunctionalIdentifier id;
+        if (mbox != null) {
+            id = IdCreator.from(mbox);
+        }
+        else if (sha1 != null) {
+            id = IdCreator.from(sha1);
+        }
+        else if (account != null) {
+            id = IdCreator.from(account);
+        }
+        else if (openId != null) {
+            id = IdCreator.from(openId);
+        }
+        else {
+            id = null;
+        }
+        agent.setId(id);
         return agent;
     }
 
@@ -59,6 +81,11 @@ public class AgentBuilder {
 
     public AgentBuilder account(Account account) {
         this.account = account;
+        return this;
+    }
+
+    public AgentBuilder name(String name) {
+        this.name = name;
         return this;
     }
 

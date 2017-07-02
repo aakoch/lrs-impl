@@ -1,10 +1,12 @@
 package com.adamkoch.lrs.builders;
 
 import com.adamkoch.lrs.api.Account;
+import com.adamkoch.lrs.api.Agent;
 import com.adamkoch.lrs.api.MailToIri;
 import com.adamkoch.lrs.api.OpenId;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
 /**
@@ -23,24 +25,32 @@ public class AgentBuilderTest {
     @Test
     public void testAgentWithMbox() throws Exception {
         MailToIri mbox = mock(MailToIri.class);
-        new AgentBuilder().mbox(mbox).build();
+        final Agent agent = new AgentBuilder().mbox(mbox)
+                                              .build();
+        assertEquals(mbox, agent.getId().getMBox().get());
     }
 
     @Test
     public void testAgentWithMboxSha1Sum() throws Exception {
-        new AgentBuilder().mboxSha1Sum(new DummySha1Sum("test")).build();
+        final DummySha1Sum sha1 = new DummySha1Sum("test");
+        final Agent agent = new AgentBuilder().mboxSha1Sum(sha1)
+                                              .build();
+        assertEquals(sha1, agent.getId().getMboxSha1Sum().get());
     }
 
     @Test
     public void testAgentWithOpenId() throws Exception {
         OpenId openId = mock(OpenId.class);
-        new AgentBuilder().openId(openId).build();
+        final Agent agent = new AgentBuilder().openId(openId)
+                                              .build();
+
     }
 
     @Test
     public void testAgentWithAccount() throws Exception {
         Account account = mock(Account.class);
-        new AgentBuilder().account(account).build();
+        final Agent agent = new AgentBuilder().account(account)
+                                              .build();
     }
 
     @Test(expected = IllegalArgumentException.class)

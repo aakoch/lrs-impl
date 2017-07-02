@@ -4,7 +4,7 @@ import com.adamkoch.lrs.api.*;
 import com.adamkoch.lrs.factories.IriFactory;
 import com.adamkoch.lrs.factories.IrlFactory;
 import com.adamkoch.lrs.factories.LanguageTagFactory;
-import org.junit.Ignore;
+import com.adamkoch.lrs.factories.MailToIriFactory;
 import org.junit.Test;
 
 import javax.json.Json;
@@ -36,11 +36,15 @@ public class FromJsonTest {
     }
 
     @Test
-    @Ignore("please implement me")
     public void testGroup() {
         JsonObject jsonObject = readFromFileToJsonObject("examples/complex_group.json");
         Group group = JsonConverter.convertToGroup(jsonObject);
+
         assertNotNull(group);
+        assertEquals("Team PB", group.getName().get());
+        if (group instanceof IdentifiedGroup) {
+            assertEquals(IdCreator.from(MailToIriFactory.of("mailto:teampb@example.com")), ((IdentifiedGroup) group).getId());
+        }
         assertEquals(3, group.getMember().size());
     }
 

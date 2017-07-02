@@ -9,11 +9,14 @@ import com.adamkoch.lrs.factories.MailToIriFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.json.JsonArray;
 import javax.json.JsonObject;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * <p>Created by aakoch on 2017-03-23.</p>
@@ -166,11 +169,38 @@ public class JsonConverter {
     public static Group convertToGroup(JsonObject jsonObject) {
         Group group = null;
         if (jsonObject.containsKey("mbox")) {
-            Collection<Agent> members = new ArrayList<>();
+
+            final Collection<Agent> members;
+            if (jsonObject.containsKey("member")) {
+                members = createMembers(jsonObject.getJsonArray("member"));
+            }
+            else {
+                members = Collections.emptyList();
+            }
             String name = jsonObject.getString("name");
             InverseFunctionalIdentifier id = IdCreator.from(MailToIriFactory.of(jsonObject.getString("mbox")));
-            group = new DefaultIdentifiedGroup(members, name, id);
+            group = new IdentifiedGroupBuilder().members(members)
+                                                .name(name)
+                                                .id(id)
+                                                .build();
         }
         return group;
+    }
+
+    private static List<Agent> createMembers(JsonArray members) {
+        List<Agent> membersList = new ArrayList<>();
+        for (int i = 0; i < members.size(); i++) {
+            final JsonObject jsonObject = members.getJsonObject(i);
+            membersList.add(convertToAgent(jsonObject));
+        }
+
+        return membersList;
+    }
+
+    private static Agent convertToAgent(JsonObject jsonObject) {
+        AgentBuilder builder = new AgentBuilder()
+                .name(jsonObject.getString("name"))
+                .mbox(MailToIriFactory.of(jsonObject.getString("mbox")));
+        return builder.build();
     }
 }
