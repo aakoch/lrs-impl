@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.json.JsonArray;
 import javax.json.JsonObject;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
@@ -199,8 +200,39 @@ public class JsonConverter {
 
     private static Agent convertToAgent(JsonObject jsonObject) {
         AgentBuilder builder = new AgentBuilder()
-                .name(jsonObject.getString("name"))
-                .mbox(MailToIriFactory.of(jsonObject.getString("mbox")));
+                .name(jsonObject.getString("name"));
+        if (jsonObject.containsKey("account")) {
+            builder.account(convertToAccount(jsonObject.getJsonObject("account")));
+        }
+        else if (jsonObject.containsKey("openid")) {
+            builder.openId(convertToOpenId(jsonObject.getString("openid")));
+        }
+        else if (jsonObject.containsKey("mbox_sha1sum")) {
+            builder.mboxSha1Sum(convertToMboxSha1Sum(jsonObject.getString("mbox_sha1sum")));
+        }
+        //        .mbox(MailToIriFactory.of(jsonObject.getString("mbox")));
+        return builder.build();
+    }
+
+    private static Sha1Sum convertToMboxSha1Sum(String mboxSha1SumAsString) {
+        try {
+            final Sha1Creator sha1Creator = new Sha1Creator();
+            return sha1Creator.getSha1(mboxSha1SumAsString);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private static OpenId convertToOpenId(String uriAsString) {
+        UniformResourceIdentifier uri = new DefaultUri(uriAsString);
+        OpenId openId = new DefaultOpenId(uri);
+        return openId;
+    }
+
+    private static Account convertToAccount(JsonObject jsonObject) {
+        AccountBuilder builder = new AccountBuilder();
+        builder.name(jsonObject.getString("name")).homePage(jsonObject.getString("homePage"));
         return builder.build();
     }
 }

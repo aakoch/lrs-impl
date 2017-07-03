@@ -12,6 +12,7 @@ import javax.json.JsonObject;
 import javax.json.JsonReader;
 import java.io.InputStream;
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.Set;
 
 import static org.junit.Assert.*;
@@ -45,7 +46,8 @@ public class FromJsonTest {
         if (group instanceof IdentifiedGroup) {
             assertEquals(IdCreator.from(MailToIriFactory.of("mailto:teampb@example.com")), ((IdentifiedGroup) group).getId());
         }
-        assertEquals(3, group.getMember().size());
+        final Collection<Agent> members = group.getMember();
+        assertEquals(3, members.size());
     }
 
     @Test

@@ -1,9 +1,9 @@
 package com.adamkoch.lrs.builders;
 
-import com.adamkoch.lrs.NotYetImplementedException;
 import com.adamkoch.lrs.api.Account;
 import com.adamkoch.lrs.api.InternationalizedResourceLocator;
 import com.adamkoch.lrs.api.ObjectType;
+import com.adamkoch.lrs.factories.IrlFactory;
 
 import java.util.Optional;
 
@@ -16,24 +16,51 @@ import java.util.Optional;
  * @since 1.0.0
  */
 public class AccountBuilder {
+    private String name;
+    private String homePage;
+
     public Account build() {
-        return new InnerAccount();
+        final InnerAccount account = new InnerAccount();
+        account.setName(name);
+        account.setHomePage(IrlFactory.of(homePage));
+        return account;
+    }
+
+    public AccountBuilder name(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public AccountBuilder homePage(String homePage) {
+        this.homePage = homePage;
+        return this;
     }
 
     private class InnerAccount implements Account {
+        private String name;
+        private InternationalizedResourceLocator homePage;
+
         @Override
         public InternationalizedResourceLocator getHomePage() {
-            throw new NotYetImplementedException();
+            return homePage;
         }
 
         @Override
         public String getName() {
-            throw new NotYetImplementedException();
+            return name;
         }
 
         @Override
         public Optional<ObjectType> getObjectType() {
-            throw new NotYetImplementedException();
+            return Optional.of(ObjectType.AGENT);
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public void setHomePage(InternationalizedResourceLocator homePage) {
+            this.homePage = homePage;
         }
     }
 }
